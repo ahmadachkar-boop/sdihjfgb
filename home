@@ -1,0 +1,2291 @@
+<style>
+/* ===== CARPOOL HOME PAGE — Base Styles ===== */
+
+/* Design tokens - Neutral Professional Theme */
+:root{
+  --accent:#500000;           /* Texas A&M Maroon */
+  --accent-light:#6a0000;
+  --accent-gradient: linear-gradient(135deg, #500000 0%, #6a0000 100%);
+  --bg:#f9fafb;               /* Light gray background */
+  --text:#1f2937;
+  --muted:#6b7280;
+  --muted-accessible:#4b5563;
+  --card:#ffffff;             /* White cards */
+
+  /* Professional gradients */
+  --gradient-primary: linear-gradient(135deg, #500000 0%, #6a0000 50%, #7a0000 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(80,0,0,0.05) 0%, rgba(106,0,0,0.08) 100%);
+  --gradient-mesh: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Modern border radius */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 999px;
+
+  /* Professional shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04), 0 1px 4px rgba(0,0,0,.06);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,.25);
+  --shadow-colored: 0 8px 32px -8px rgba(80,0,0,.3);
+
+  --shell-max: 1280px;
+  --shell-pad: clamp(16px, 3vw, 32px);
+  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-heading: #111827;
+  --text-secondary: #6b7280;
+  --ring: rgba(80, 0, 0, 0.3);
+
+  /* Animation timing */
+  --anim-duration: 0.6s;
+  --anim-stagger: 0.08s;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Override Avada theme margins */
+.fusion-layout-column .fusion-column-wrapper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Base */
+.carpool-landing *{ box-sizing:border-box; }
+
+/* Base background and typography */
+.carpool-landing{
+  background:var(--bg);
+  background-image:var(--gradient-mesh);
+  color:var(--text);
+  font-family:var(--font-primary);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Try to apply to body as well (separate rule for safety) */
+body .carpool-landing{
+  background:var(--bg);
+  background-image:var(--gradient-mesh);
+}
+
+/* Modern browsers only - :has() support */
+@supports selector(:has(*)) {
+  html:has(.carpool-landing),
+  body:has(.carpool-landing) {
+    background:var(--bg);
+    background-image:var(--gradient-mesh);
+  }
+}
+
+.carpool-wrap{
+  max-width:var(--shell-max);
+  margin:0 auto;
+  padding:48px var(--shell-pad) 0;
+  position: relative;
+  z-index: 50;
+}
+
+/* Reusable button (base) */
+.btn{
+  text-decoration:none;
+  border-radius:var(--radius-md);
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px;
+  font-size:1rem;
+  padding:14px 24px;
+  font-weight:600;
+  border:2px solid transparent;
+  color:#fff;
+  background:var(--gradient-primary);
+  box-shadow:var(--shadow-colored);
+  transition:all 0.3s var(--ease-smooth);
+  position:relative;
+  overflow:hidden;
+}
+.btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  opacity:0;
+  transition:opacity 0.3s var(--ease-smooth);
+}
+.btn:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:var(--shadow-xl), 0 0 0 1px rgba(0,0,0,0.1);
+}
+.btn:hover::before{
+  opacity:1;
+}
+.btn:active{
+  transform:translateY(0) scale(0.98);
+}
+
+/* Section headings */
+.section{ margin:48px 0 24px; }
+.section h2{
+  text-align:center; margin:0 0 24px;
+  font-size:clamp(28px,3.5vw,42px); font-weight:800;
+  letter-spacing: -0.5px;
+  background:var(--gradient-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;
+  padding-bottom: 12px;
+}
+.section h2::after{
+  content:""; display:block; height:4px; width:80px; margin:12px auto 0;
+  background:var(--gradient-primary);
+  border-radius:var(--radius-full);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Focus styles (a11y) */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Utility margins used in HTML */
+.mt-6 { margin-top: 0.375rem; }
+.mt-10 { margin-top: 0.625rem; }
+
+/* --- Status Banner (base) --- */
+.carpool-banner{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  background:var(--card);
+  border:none;
+  border-radius:var(--radius-xl);
+  padding:14px 18px;
+  box-shadow:var(--shadow-md);
+  margin:24px 0 20px;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s var(--ease-smooth);
+  border-top: 3px solid var(--accent);
+}
+.carpool-banner:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-lg);
+}
+.carpool-banner .icon{
+  width:40px;
+  height:40px;
+  border-radius:var(--radius-md);
+  background:#f3f4f6;
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:20px;
+  line-height:1;
+  border:2px solid rgba(0,0,0,.1);
+  flex-shrink:0;
+  align-self:center;
+}
+.carpool-banner .banner-text {
+  margin: 0;
+  line-height: 1.5;
+  font-size:1rem;
+  align-self:center;
+}
+.carpool-banner strong, .carpool-banner em { white-space: normal; }
+
+/* Error / downtime style */
+.carpool-banner.error{
+  border-top-color: #dc2626;
+}
+.carpool-banner.error::before{
+  background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+}
+.carpool-banner.error .icon{
+  background: linear-gradient(135deg, rgba(220,38,38,0.1) 0%, rgba(239,68,68,0.15) 100%);
+  color:#dc2626;
+  border-color:rgba(220,38,38,0.2);
+}
+.carpool-banner.error .banner-text strong{ color: #dc2626; }
+
+/* Success / running style */
+.carpool-banner.success{
+  border-top-color: #10b981;
+}
+.carpool-banner.success .icon{
+  background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.15) 100%);
+  color:#10b981;
+  font-size:24px;
+  border-color:rgba(16,185,129,0.2);
+}
+.carpool-banner.success .banner-text strong{ color: #10b981; }
+
+/* --- Hero --- */
+.hero{ text-align:center; margin: 24px 0 40px; position: relative; }
+.hero h1{
+  margin:0 0 32px;
+  font-size:clamp(36px,3vw,64px);
+  font-weight:900;
+  letter-spacing:-1px;
+  line-height: 1.15;
+  color: var(--text-heading);
+}
+
+/* --- Hero Highlight --- */
+.hero-highlight{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  margin:32px auto 48px;
+  padding:48px 40px;
+  max-width:960px;
+  background:#fff;
+  border:none;
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-lg);
+  transition: all 0.4s var(--ease-smooth);
+  position:relative;
+  overflow:hidden;
+}
+.hero-highlight::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:6px;
+  background:var(--gradient-primary);
+}
+.hero-highlight:hover{
+  box-shadow:var(--shadow-xl);
+  transform: translateY(-4px);
+}
+.hero-highlight .stat-value{
+  font-size:clamp(48px,8vw,80px);
+  font-weight:900;
+  background:var(--gradient-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.1;
+  margin:0 0 8px 0;
+  display:block;
+}
+.hero-highlight .stat-label{
+  margin-top:0;
+  color:var(--muted-accessible, var(--muted));
+  font-size:clamp(0.95rem,1.5vw,1.1rem);
+  font-weight:500;
+}
+.hero-highlight .hero-promise{
+  margin-top:32px;
+  font-size:clamp(1.25rem,3vw,2rem);
+  font-weight:700;
+  color:var(--text-heading);
+  line-height:1.4;
+  max-width:800px;
+}
+/* Subtle pop for key phrase */
+.hero-highlight .promise-pop{
+  position:relative;
+  font-weight:800;
+  background:var(--gradient-soft);
+  padding:0 .4em;
+  border-radius:var(--radius-sm);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image:
+    var(--gradient-soft),
+    linear-gradient(to right, var(--accent) 0%, var(--accent-light) 100%);
+  background-size: 100% 100%, 100% 4px;
+  background-position: 0 0, 0 100%;
+  background-repeat: no-repeat;
+}
+.hero-highlight .promise-pop::after{
+  display: none;
+}
+
+/* --- Info grid (card left, video right) --- */
+.info-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);
+  grid-template-areas: "left right";
+  gap:40px;
+  align-items:center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.info-grid > .card{
+  grid-area:left; min-width:0;
+  background: var(--card);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 40px 36px 36px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s var(--ease-smooth);
+  position:relative;
+  overflow:hidden;
+}
+.info-grid > .card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:var(--gradient-primary);
+}
+.info-grid > .card:hover{
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-6px);
+}
+.info-grid > .video-wrap{ grid-area:right; min-width:0; }
+
+/* What is CARPOOL heading */
+.info-grid .card h2 {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 800;
+  margin: 0 0 24px;
+  margin-left: 0;
+  margin-right: 0;
+  padding-bottom: 20px;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  color: var(--text-heading);
+}
+.info-grid .card h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+}
+
+/* Paragraph rhythm inside the card */
+.info-grid .card p { margin: 0 0 16px; line-height:1.7; color:var(--text); }
+.info-grid .card p:last-child { margin-bottom: 0; }
+
+/* FAQ inside the card */
+.info-grid .faq details { margin-bottom: 16px; }
+.info-grid .faq details:last-child { margin-bottom: 0; }
+
+/* Stack on narrow */
+@media (max-width:900px){
+  .info-grid{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "left"
+      "right";
+    gap:16px;
+  }
+}
+
+/* --- Video (right column) --- */
+.video-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+}
+.video-frame{
+  width:100%;
+  max-width:560px;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  margin:0;
+  padding:0;
+  background:#fff;
+  border:none;
+  box-shadow:var(--shadow-lg);
+  border-radius:var(--radius-xl);
+  transition: all 0.4s var(--ease-smooth);
+  position:relative;
+}
+.video-frame::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:var(--radius-xl);
+  padding:3px;
+  background:var(--gradient-primary);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  pointer-events:none;
+  opacity:0.6;
+}
+.video-frame:hover{
+  box-shadow:var(--shadow-xl);
+  transform: translateY(-4px) scale(1.02);
+}
+.video-frame video{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  border-radius:var(--radius-xl);
+  background:#0f1115;
+}
+.video-caption{
+  font-size:0.95rem;
+  color:var(--muted-accessible, var(--muted));
+  text-align:center;
+  margin-top:16px;
+  font-weight:500;
+  width:100%;
+  max-width:560px;
+}
+
+/* --- FAQ (inline on homepage card) --- */
+.faq details{
+  background:var(--gradient-soft);
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:var(--radius-md);
+  padding:16px 20px;
+  margin-bottom:12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s var(--ease-smooth);
+  cursor:pointer;
+}
+.faq details:hover{
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color:rgba(0,0,0,.12);
+}
+.faq details[open]{
+  background:var(--card);
+  box-shadow:var(--shadow-md);
+}
+.faq summary{
+  cursor:pointer;
+  font-weight:700;
+  list-style:none;
+  color:var(--text-heading);
+  font-size:1.05rem;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq .answer{
+  color:var(--text);
+  margin-top:12px;
+  line-height:1.7;
+  padding-top:12px;
+  border-top:1px solid rgba(0,0,0,.2);
+}
+
+/* --- Hours block --- */
+.hours{ text-align:center; }
+.hours .big{
+  font-weight:800;
+  font-size:clamp(18px,2vw,24px);
+  margin-bottom: 16px;
+  color:var(--text-heading);
+}
+.hours .note{
+  color:var(--muted-accessible, var(--muted));
+  line-height: 1.7;
+  font-size:1.05rem;
+}
+
+#hours .hours {
+  background: #fff;
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s var(--ease-smooth);
+  padding: 32px 40px;
+  position:relative;
+  overflow:hidden;
+}
+#hours .hours::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:var(--gradient-primary);
+}
+
+@media (hover: hover){
+  #hours .hours:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+/* HOW IT WORKS Section */
+.how-it-works,
+.how-it-works * { box-sizing: border-box; }
+.how-it-works { max-width: 100%; margin-inline: auto; margin-top: 48px; overflow: visible; }
+
+.how-it-works .hiw-steps{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+}
+
+.how-it-works .hiw-step-wrapper{
+  position:relative;
+  min-width: 0;
+  transition:all 0.4s var(--ease-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.how-it-works .hiw-step-wrapper:hover .hiw-step{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:var(--shadow-xl);
+}
+
+.how-it-works .hiw-step{
+  position:relative;
+  background:var(--card);
+  border:none;
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-md);
+  padding:20px 24px 32px;
+  text-align:center;
+  transition:all 0.4s var(--ease-smooth);
+  isolation:isolate;
+  min-width: 0;
+  overflow:hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.how-it-works .hiw-step::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:6px;
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--gradient-primary);
+}
+
+.how-it-works .badge{
+  position:absolute;
+  left:50%;
+  top:0;
+  transform:translate(-50%, -50%);
+  width:56px;
+  height:56px;
+  border-radius:var(--radius-full);
+  display:grid;
+  place-items:center;
+  background:var(--accent);
+  border:4px solid var(--bg);
+  box-shadow:var(--shadow-md);
+  font-weight:900;
+  font-size:1.25rem;
+  color:#ffffff;
+  z-index:1;
+}
+
+.how-it-works .hiw-icon{
+  width:64px; height:64px; margin:24px auto 16px;
+  border-radius:var(--radius-full);
+  display:grid; place-items:center;
+  background: var(--gradient-soft);
+  border:2px solid rgba(0,0,0,.1);
+  font-size:28px; line-height:1;
+  color: var(--accent);
+}
+
+.how-it-works .hiw-title{
+  margin:12px 0 8px;
+  font-weight:800;
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  color:var(--text-heading);
+}
+.how-it-works .hiw-text{
+  margin:0;
+  color:var(--text);
+  font-size:1rem;
+  line-height:1.6;
+}
+
+/* TEAM SPOTLIGHT */
+.team-spotlight{
+  --ts-radius: 16px;
+  --ts-shadow: 0 18px 46px -22px rgba(0,0,0,.35);
+  --ts-border: 1px solid rgba(0,0,0,.1);
+  --ts-bg: var(--card);
+  --ts-ctrl-w: 40px;
+  --ts-ctrl-gap: 8px;
+  margin: 18px 0 10px;
+  display: grid;
+  grid-template-rows: auto minmax(0, auto);
+  grid-template-areas:
+    "title"
+    "stage";
+}
+.team-spotlight h2{
+  grid-area: title;
+  margin: 0 0 24px;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(28px,3.5vw,42px);
+  letter-spacing: -0.5px;
+  background:var(--gradient-primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;
+  padding-bottom: 12px;
+}
+.team-spotlight h2::after{
+  content:""; display:block; height:4px; width:80px; margin:12px auto 0;
+  background:var(--gradient-primary);
+  border-radius:var(--radius-full);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+#team-spotlight #team-spotlight-title{
+  text-align: center;
+  display: block;
+  margin-inline: auto;
+}
+
+.team-spotlight .ts-stage{
+  grid-area: stage;
+  position: relative;
+  min-height: 240px;
+  border-radius: var(--ts-radius);
+  background: var(--ts-bg);
+  border: var(--ts-border);
+  box-shadow: var(--ts-shadow);
+  overflow: visible;
+  display: grid;
+}
+
+/* Slide layout */
+#team-spotlight .ts-slide{
+  position: static;
+  inset: unset;
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 14px;
+  padding: 16px;
+  opacity: 0;
+  transform: none;
+  pointer-events: none;
+  transition: opacity .35s ease;
+}
+#team-spotlight .ts-slide.is-active{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Image */
+.ts-photo{
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: 12px;
+  background: #f6f7f9;
+}
+
+/* Text */
+.ts-info{ display: grid; align-content: start; gap: 0; position: relative; }
+.ts-name{ margin: 0 0 2px 0; font: 800 clamp(20px, 2.6vw, 24px)/1.2 var(--font-primary); color: var(--text-heading); }
+.ts-role{ margin: 0 0 8px 0; color: var(--text); font-weight: 700; opacity: 0.7; }
+.ts-actions{
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;
+  position: relative;
+  padding-right: calc(var(--ts-ctrl-w) * 2 + var(--ts-ctrl-gap) + 16px);
+}
+.ts-btn{
+  display: inline-grid; place-items: center;
+  padding: 10px 14px; border-radius: 12px;
+  border: 1px solid var(--accent);
+  background: var(--accent); font-weight: 800; text-decoration: none; color: #ffffff;
+}
+.ts-btn:hover{ background: var(--accent-light); }
+
+/* Facts block */
+#team-spotlight .ts-facts{
+  max-height: 280px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  padding: 10px 12px;
+  padding-right: 12px;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+  border: 1px solid rgba(17,24,39,.10);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fafafa, #f3f4f6);
+}
+#team-spotlight .ts-facts.ts--expanded{
+  max-height: none;
+}
+#team-spotlight .ts-facts.ts--masked::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0; height:48px;
+  background: linear-gradient(transparent, #fafafa);
+  pointer-events:none;
+}
+
+#team-spotlight .ts-fact{
+  display: block;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  line-height: 1.45;
+  gap: 0;
+}
+#team-spotlight .ts-fact .k{
+  display: inline;
+  font-weight: 800;
+  color: #374151;
+}
+#team-spotlight .ts-fact .k::after{
+  content: ": ";
+  margin: 0;
+}
+#team-spotlight .ts-fact .v{
+  display: inline;
+  color: #111;
+  min-width: 0;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Controls inside the card */
+#team-spotlight .ts-controls{
+  grid-area: stage;
+  align-self: end;
+  justify-self: end;
+  margin: 12px;
+  display: flex;
+  gap: var(--ts-ctrl-gap);
+  z-index: 3;
+}
+
+#team-spotlight .ts-controls .ts-prev,
+#team-spotlight .ts-controls .ts-next{
+  width: var(--ts-ctrl-w);
+  height: var(--ts-ctrl-w);
+  border-radius: 10px;
+  border: 1px solid rgba(17,24,39,.12);
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+#team-spotlight .ts-controls button:hover{ background:#f3f4f6; }
+
+/* Position "View all staff" button at bottom left of info section on desktop */
+@media (min-width: 701px) {
+  #team-spotlight .ts-info {
+    align-content: start;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+  #team-spotlight .ts-facts {
+    margin-bottom: 50px;
+    max-height: none;
+    flex: 1;
+    min-height: 140px;
+  }
+  #team-spotlight .ts-actions a[href="/staff/"] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+  }
+  #team-spotlight .ts-actions a[href^="mailto:"] {
+    display: inline-flex;
+  }
+  #team-spotlight .ts-actions {
+    padding-right: calc(var(--ts-ctrl-w) * 2 + var(--ts-ctrl-gap) + 16px);
+  }
+}
+
+/* CTA SECTION */
+.cta-section{
+  background: transparent;
+  position: relative;
+  margin: 64px 0 0;
+  padding: 48px 0 0;
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-section::before{
+  content:"";
+  position:absolute;
+  top:-60px;
+  left:50%;
+  transform:translateX(-50%);
+  width: 100%;
+  max-width: var(--shell-max);
+  height:80px;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(0,0,0,.04), transparent 70%);
+  pointer-events:none;
+  z-index:-1;
+}
+.cta-shell{
+  max-width: var(--shell-max);
+  margin:0 auto;
+  padding:0 var(--shell-pad);
+  background: transparent;
+}
+
+.cta-head{ text-align:center; margin:0 0 40px; }
+.cta-head .eyebrow{
+  display:inline-block;
+  margin:0 0 16px;
+  padding:10px 20px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  font-size:0.9rem;
+  border:2px solid rgba(0,0,0,.1);
+  border-radius:var(--radius-full);
+  background:var(--gradient-soft);
+  color:var(--accent);
+}
+.cta-head h2{
+  margin:0 0 12px;
+  font-weight:900;
+  letter-spacing:-0.5px;
+  font-size: clamp(28px, 3.5vw, 42px);
+  text-decoration:none;
+  border-bottom:0;
+  color: var(--text-heading);
+}
+.cta-head h2 *{ text-decoration:none; border-bottom:0; }
+.cta-head .sub{
+  margin:12px 0 0;
+  color: var(--muted,#6b7280);
+  font-size:1.1rem;
+  font-weight:500;
+}
+
+.cta-grid{
+  list-style:none;
+  margin:32px 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  grid-auto-flow:row;
+  grid-auto-rows:auto;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+.cta-grid > :not(.tile){ display:none; }
+.cta-grid > .tile > :not(.cta-tile){ display:none; }
+.cta-grid > .tile{ margin:0; padding:0; }
+
+.cta-tile{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  text-decoration:none;
+  border:none;
+  border-radius:var(--radius-xl);
+  padding:24px 20px;
+  background:var(--card);
+  color:var(--text);
+  box-shadow:var(--shadow-md);
+  transition: all 0.4s var(--ease-smooth);
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  position:relative;
+  overflow:hidden;
+}
+.cta-tile::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:var(--gradient-primary);
+}
+.cta-tile:hover{
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.cta-primary, .cta-accent, .cta-neutral{
+  background:#fff;
+}
+
+.cta-icon{
+  width:56px;
+  height:56px;
+  border-radius:var(--radius-md);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--gradient-soft);
+  border:2px solid rgba(0,0,0,.1);
+  box-shadow:var(--shadow-sm);
+  color: var(--accent);
+  flex:0 0 56px;
+  line-height:0;
+}
+.cta-icon svg{ display:block; width:26px; height:26px; }
+
+.cta-copy{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  line-height:1.4;
+  overflow:visible;
+}
+.cta-copy strong{
+  display:block;
+  font-weight:800;
+  line-height:1.3;
+  font-size:1.1rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:var(--text-heading);
+  margin:0;
+}
+.cta-copy .meta{
+  display:block;
+  color: var(--muted,#6b7280);
+  font-weight:500;
+  font-size:0.95rem;
+  line-height:1.4;
+  margin-top:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.cta-support{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:32px;
+  background: #fff;
+  border:none;
+  border-radius:var(--radius-xl);
+  padding:20px 24px;
+  box-shadow:var(--shadow-md);
+  width: 100%;
+  box-sizing: border-box;
+  position:relative;
+  overflow:hidden;
+}
+
+.cta-support .chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 18px;
+  border-radius:var(--radius-full);
+  background:var(--gradient-soft);
+  border:2px solid rgba(0,0,0,.08);
+  font-weight:700;
+  color:var(--accent);
+  text-decoration:none;
+  min-height:44px;
+  transition:all 0.3s var(--ease-smooth);
+}
+.cta-support .chip:hover{
+  background:var(--gradient-primary);
+  color:#fff;
+  transform:scale(1.05);
+}
+.cta-support .spacer{ flex:1 1 auto; }
+
+.cta-social{ display:flex; gap:10px; }
+.cta-social .social{
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:var(--radius-md);
+  text-decoration:none;
+  background:var(--gradient-soft);
+  border:2px solid rgba(0,0,0,.08);
+  box-shadow:var(--shadow-sm);
+  font-weight:900;
+  color:var(--accent);
+  transition:all 0.3s var(--ease-smooth);
+}
+.cta-social .social:hover{
+  background:var(--gradient-primary);
+  color:#fff;
+  transform:scale(1.1) rotate(5deg);
+}
+
+.cta-tile:focus-visible,
+.cta-support .chip:focus-visible,
+.cta-social .social:focus-visible{
+  outline:3px solid var(--ring); outline-offset:2px; border-radius:12px;
+}
+
+/* CSS-ONLY RIDE MODAL */
+.ride-modal-root { position: relative; z-index: 100; isolation: isolate; }
+
+#ride-modal-toggle {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; clip-path: inset(50%);
+  border: 0; padding: 0; margin: -1px;
+}
+
+.ride-modal-overlay,
+.ride-modal { position: fixed; inset: 0; display: none; }
+
+.ride-modal-root #ride-modal-toggle:checked ~ .ride-modal-overlay,
+.ride-modal-root #ride-modal-toggle:checked ~ .ride-modal { display: block; }
+
+.ride-modal-overlay {
+  cursor: pointer; background: rgba(0,0,0,0.6); pointer-events: auto;
+  z-index: 110;
+}
+
+.ride-modal {
+  position: fixed;
+  z-index: 120;
+}
+.ride-modal::before {
+  content: "";
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  z-index: 1; pointer-events: none;
+}
+@supports (-webkit-touch-callout: none) { .ride-modal::before { display: none; } }
+
+.ride-modal__panel {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  overflow: auto;
+  pointer-events: none;
+  z-index: 130;
+  font-family: inherit;
+  -webkit-transform: translateZ(0); transform: translateZ(0);
+}
+
+.ride-modal__card {
+  pointer-events: auto;
+  width: min(92vw, 560px);
+  max-height: 90vh;
+  background: #fff; color: #111;
+  border-radius: 16px;
+  border: 1px solid rgba(17,24,39,.08);
+  box-shadow: 0 30px 70px rgba(0,0,0,.28);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.ride-modal__card[hidden]{ display:none; }
+
+.ride-modal__head {
+  position: relative;
+  background: linear-gradient(180deg, #5a0000 0%, #500000 100%);
+  padding: 20px 22px 18px;
+}
+.ride-modal__title {
+  margin: 0; font-size: 1.35rem; line-height: 1.25; letter-spacing: .2px;
+  color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.25);
+}
+.ride-modal__subtitle {
+  margin: 6px 0 0; font-size: .98rem;
+  color: rgba(255,255,255,.95); text-shadow: 0 1px 0 rgba(0,0,0,.25);
+}
+
+.ride-modal__close {
+  position: absolute; top: 10px; right: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 8px; font-size: 1.1rem;
+  color: #fff; text-decoration: none; cursor: pointer;
+}
+.ride-modal__close:hover,
+.ride-modal__close:focus-visible { background: rgba(255,255,255,.12); outline: none; }
+
+.ride-modal__body { padding: 20px 22px 0; font-size: 1rem; line-height: 1.6; overflow: auto; flex: 1; }
+
+.ride-modal__actions,
+.ride-modal__body .actions,
+.ride-modal__body .ride-actions{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 14px 0 18px;
+  padding: 0 22px;
+  box-sizing: border-box;
+}
+
+.ride-modal .ride-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; min-height: 48px; width: 100%; max-width: 100%;
+  padding: 12px 14px; border-radius: 12px; font-weight: 700;
+  text-decoration: none; line-height: 1;
+  box-sizing: border-box; flex: initial;
+}
+.ride-modal .ride-btn .ride-icon,
+.ride-modal .ride-btn > svg { width: 20px; height: 20px; display: block; flex: 0 0 20px; line-height: 0; }
+.ride-modal .ride-btn > * { margin: 0; transform: none; }
+
+.ride-btn--call {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 6px 16px rgba(80,0,0,.25);
+}
+.ride-btn--call:hover { background: var(--accent-light); }
+
+.ride-btn--secondary {
+  background: #f3f4f6; color: #111;
+  border: 1px solid rgba(17,24,39,.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 2px 8px rgba(0,0,0,.06);
+  font-weight: 800;
+}
+.ride-btn--secondary:hover { background: #e7ebf0; }
+.ride-btn--secondary:active { background: #dde3ea; }
+.ride-btn--secondary:focus-visible {
+  outline: 3px solid rgba(80, 0, 0, 0.45); /* Fallback */
+  outline: 3px solid color-mix(in srgb, var(--accent,#500000) 45%, #ffffff);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* Motion */
+@media (prefers-reduced-motion: no-preference) {
+  .ride-modal__card {
+    transform: translateY(10px) scale(.992); opacity: 0;
+    animation: ride-pop .22s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes ride-pop { to { transform: translateY(0) scale(1); opacity: 1; } }
+}
+
+.ride-modal-root > p { margin: 0; padding: 0; }
+.ride-modal-root > p:empty { display: none; }
+.ride-modal-root br { display: none; }
+
+/* Hide modal/blur when no popup card is visible */
+.ride-modal-root:not(:has(#ride-card-open:not([hidden]), #ride-card-winddown:not([hidden]))) .ride-modal,
+.ride-modal-root:not(:has(#ride-card-open:not([hidden]), #ride-card-winddown:not([hidden]))) .ride-modal-overlay {
+  display: none;
+}
+
+.ride-modal-root #ride-modal-toggle:not(:checked) ~ .ride-modal,
+.ride-modal-root #ride-modal-toggle:not(:checked) ~ .ride-modal-overlay {
+  display: none;
+}
+
+/* Lock body scroll when modal is open */
+body:has(.ride-modal-root #ride-modal-toggle:checked):has(#ride-card-open:not([hidden]), #ride-card-winddown:not([hidden])) {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Prevent top margin collapse */
+.carpool-landing .carpool-wrap { padding-top: 1px; margin-top: -1px; }
+
+/* MOBILE POLISH */
+@media (max-width: 700px){
+  :root{ --shell-pad: 16px; }
+
+  .carpool-wrap{
+    padding: 24px max(16px, env(safe-area-inset-left)) 32px max(16px, env(safe-area-inset-right));
+  }
+
+  h1 {
+    font-size: clamp(24px, 7vw, 28px);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: clamp(16px, 5vw, 20px);
+    line-height: 1.25;
+  }
+  p, li, .banner-text, .stat-label, .video-caption {
+    font-size: clamp(0.9rem, 4vw, 0.95rem);
+    line-height: 1.5;
+  }
+
+  .carpool-banner {
+    padding: 6px 8px;
+    gap: 6px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px -10px rgba(0,0,0,0.2);
+  }
+  .carpool-banner .icon {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+
+  .hero {
+    margin: 8px 0 12px;
+  }
+  .hero-highlight {
+    padding: 16px 14px;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px -10px rgba(0,0,0,0.24);
+    max-width: 100%;
+  }
+  .hero-highlight .stat-value {
+    font-size: clamp(30px, 8vw, 38px);
+  }
+  .hero-highlight .hero-promise {
+    font-size: clamp(0.95rem, 4vw, 1.1rem);
+    max-width: 28ch;
+  }
+
+  #rideCount.stat-value::before{
+    content:"";
+    display:block;
+    height:8px;
+  }
+
+  .info-grid {
+    gap: 14px;
+  }
+  .info-grid > .card {
+    padding: 16px 14px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px -10px rgba(0,0,0,0.22);
+  }
+  .info-grid .card h2 {
+    font-size: clamp(16px, 4.5vw, 18px);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .info-grid .card h2::after {
+    left: 14px;
+  }
+  .info-grid .faq details {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+  .info-grid .video-frame {
+    max-width: 100%;
+    padding: 1px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px -12px rgba(0,0,0,0.2);
+  }
+
+  /* How It Works - Mobile */
+  .how-it-works {
+    margin: 24px auto 0;
+    padding: 0 max(8px, env(safe-area-inset-left)) 0 max(8px, env(safe-area-inset-right));
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .how-it-works .hiw-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .how-it-works .hiw-step {
+    padding: 20px 7px 10px;
+    border-radius: 10px;
+    min-height: 130px;
+    min-width: 0;
+    box-shadow: 0 6px 14px -8px rgba(0,0,0,0.22);
+  }
+
+  .how-it-works .badge {
+    top: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .how-it-works .hiw-step::before {
+    height: 2px;
+  }
+
+  .how-it-works .hiw-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    margin: 12px auto 4px;
+  }
+
+  .how-it-works .hiw-title {
+    font-size: clamp(0.85rem, 3.2vw, 0.9rem);
+    line-height: 1.2;
+    margin: 4px 0 2px;
+  }
+
+  .how-it-works .hiw-text {
+    font-size: clamp(0.8rem, 3vw, 0.85rem);
+    line-height: 1.3;
+  }
+
+  .how-it-works .hiw-step * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  #hours .hours {
+    padding: 8px 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px -10px rgba(0,0,0,0.2);
+  }
+  .hours .big {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  /* Team Spotlight - Mobile */
+  #team-spotlight{
+    --ts-ctrl-w: 36px;
+    --ts-ctrl-gap: 6px;
+  }
+
+  #team-spotlight .ts-stage {
+    min-height: 0;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px -10px rgba(0,0,0,0.2);
+  }
+
+  #team-spotlight .ts-slide {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ph"
+      "name"
+      "role"
+      "facts"
+      "actions";
+    gap: 2px;
+    padding: 12px;
+  }
+
+  #team-spotlight .ts-photo{
+    grid-area: ph;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 9%;
+    border-radius: 12px;
+    background: #f1f2f4;
+    min-height: 0;
+  }
+
+  #team-spotlight .ts-info{ display: contents; }
+  #team-spotlight .ts-name{
+    grid-area: name;
+    font-size: clamp(16px, 4.5vw, 18px);
+    line-height: 1.2;
+    margin: 0;
+  }
+  #team-spotlight .ts-role{
+    grid-area: role;
+    font-size: 0.9rem;
+    margin: -2px 0 1px;
+  }
+
+  #team-spotlight .ts-facts{
+    grid-area: facts;
+    max-height: 80px;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  #team-spotlight .ts-actions{
+    grid-area: actions;
+    margin-top: 1px;
+    gap: 6px;
+    padding-right: calc(var(--ts-ctrl-w) * 2 + var(--ts-ctrl-gap) + 14px);
+  }
+
+  #team-spotlight .ts-btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    min-height: 44px;
+  }
+
+  #team-spotlight .ts-controls {
+    margin: 10px;
+  }
+
+  /* CTA Section - Mobile */
+  .cta-section {
+    padding: 16px 0 20px;
+  }
+  .cta-shell {
+    padding: 0 max(8px, env(safe-area-inset-left));
+  }
+  .cta-grid {
+    gap: 8px;
+    grid-template-columns: 1fr;
+  }
+  .cta-tile {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px -10px rgba(0,0,0,0.2);
+  }
+  .cta-copy strong {
+    font-size: 0.95rem;
+  }
+  .cta-copy .meta {
+    font-size: 0.9rem;
+  }
+  .cta-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    flex: 0 0 36px;
+  }
+  .cta-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .cta-support {
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+  .cta-support .chip {
+    padding: 8px 12px;
+    min-height: 44px;
+    font-size: 0.9rem;
+  }
+  .cta-social .social {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  /* Modal - Mobile */
+  .ride-modal__panel {
+    padding: 12px;
+  }
+  .ride-modal__card {
+    width: min(94vw, 500px);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  }
+  .ride-modal__head {
+    padding: 10px 12px;
+  }
+  .ride-modal__title {
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+  .ride-modal__close {
+    width: 44px;
+    height: 44px;
+  }
+  .ride-modal__body {
+    padding: 12px 14px 0;
+    font-size: 0.95rem;
+  }
+  .ride-modal__actions {
+    margin: 10px 0 14px;
+    padding: 0 14px;
+  }
+  .ride-modal .ride-btn {
+    padding: 10px 12px;
+    min-height: 44px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  /* Tap targets */
+  .carpool-landing a, .carpool-landing .btn, .carpool-landing .ride-btn,
+  .carpool-landing .ts-btn, .carpool-landing .chip, .carpool-landing .social {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: rgba(80,0,0,0.15);
+  }
+
+  a:focus-visible, button:focus-visible, .ride-btn:focus-visible,
+  .ts-btn:focus-visible, .chip:focus-visible, .social:focus-visible {
+    outline-width: 2px;
+    outline-offset: 1px;
+  }
+}
+
+/* Ultra-narrow screens */
+@media (max-width: 360px) {
+  .how-it-works .hiw-steps {
+    gap: 1px;
+  }
+  .how-it-works .hiw-step {
+    padding: 20px 4px 8px;
+    min-height: 110px;
+  }
+  .how-it-works .badge {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+  }
+  .how-it-works .hiw-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  .how-it-works .hiw-title {
+    font-size: 0.8rem;
+  }
+  .how-it-works .hiw-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ts-slide,
+  .ride-modal__card,
+  .how-it-works .hiw-step-wrapper,
+  * {
+    animation: none;
+    transition: none;
+  }
+}
+
+</style>
+
+<!-- ======================= CARPOOL: Scheduled popup ======================= -->
+<div class="ride-modal-root" data-nosnippet="">
+  <input id="ride-modal-toggle" type="checkbox" aria-hidden="true" />
+  <label class="ride-modal-overlay" for="ride-modal-toggle" aria-hidden="true"></label>
+
+  <div class="ride-modal" role="dialog" aria-modal="true">
+    <div class="ride-modal__panel">
+
+      <!-- State A: Running (Fri/Sat 10pm–3am) -->
+      <div class="ride-modal__card" id="ride-card-open" tabindex="-1" role="document" hidden>
+        <div class="ride-modal__head">
+          <h2 id="ride-modal-title-open" class="ride-modal__title">We are currently running!</h2>
+          <p class="ride-modal__subtitle">Free, safe, nonjudgmental rides across Bryan/College Station</p>
+          <label class="ride-modal__close" for="ride-modal-toggle" aria-label="Close">✕</label>
+        </div>
+        <div id="ride-modal-desc-open" class="ride-modal__body">
+          Tap below to call CARPOOL. Our student volunteers will get you home safely.
+        </div>
+        <div class="ride-modal__actions">
+          <a class="ride-btn ride-btn--call" href="tel:+19796939905" aria-label="Call CARPOOL now">Call (979) 693-9905</a>
+          <label class="ride-btn ride-btn--secondary" for="ride-modal-toggle">Not now</label>
+        </div>
+      </div>
+
+      <!-- State B: Wind-down (Sat/Sun 3am–6am) -->
+      <div class="ride-modal__card" id="ride-card-winddown" tabindex="-1" role="document" hidden>
+        <div class="ride-modal__head">
+          <h2 id="ride-modal-title-wd" class="ride-modal__title">We are no longer accepting new calls</h2>
+          <p class="ride-modal__subtitle">Please read important information below</p>
+          <label class="ride-modal__close" for="ride-modal-toggle" aria-label="Close">✕</label>
+        </div>
+        <div id="ride-modal-desc-wd" class="ride-modal__body">
+          If you called before 3:00&nbsp;am, don't worry — you're still in the queue. Our drivers will contact you when they're on the way.
+        </div>
+        <div class="ride-modal__actions">
+          <label class="ride-btn ride-btn--secondary" for="ride-modal-toggle">OK</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ===================== /CARPOOL: Scheduled popup ===================== -->
+
+
+<section class="carpool-landing">
+<div class="carpool-wrap">
+<div class="carpool-banner" role="status" aria-live="polite">
+  <div class="icon" aria-hidden="true">!</div>
+  <p class="banner-text">
+  </p>
+
+</div>
+<header class="hero">
+  <h1>Keeping Aggieland safe — one free ride at a time.</h1>
+  <div class="hero-highlight" aria-label="CARPOOL promise and stats">
+    <span id="rideCount" class="stat-value" aria-label="Total rides given" data-target="297588">297,588</span>
+    <div class="stat-label">Rides given since 1999 • as of <time datetime="2025-09-29">September 29, 2025</time></div>
+    <p class="hero-promise"><span class="promise-pop">Free, safe, nonjudgmental rides</span> home across Bryan/College Station</p>
+
+
+</div>
+</header>
+
+
+<div class="info-grid"><article class="card">
+<h2>What is CARPOOL?</h2>
+CARPOOL is a student-run 501(c)(3) non-profit serving the Bryan/College Station community with <strong>free rides home</strong> every Friday and Saturday from <strong>10:00 pm – 3:00 am</strong> during Fall and Spring semesters.
+
+If you're in the area and need a safe, judgment-free ride home, call us — our number is on the back of your TAMU ID.
+<div class="faq mt-10" aria-label="Common Questions"><details><summary>Do I have to be a current TAMU student?</summary>
+<div class="answer">No. We'll take anyone home within Bryan/College Station city limits — students, parents, visitors — anyone who needs a ride.</div>
+</details><details><summary>Do I have to be intoxicated?</summary>
+<div class="answer">No. You can take CARPOOL for any reason. We just want you home safely.</div>
+</details><details><summary>Do you take riders to Northgate or parties?</summary>
+<div class="answer">We take you <em>home from</em> the party — not to it.</div>
+</details></div>
+</article>
+<figure class="video-wrap" aria-label="What is CARPOOL video">
+<div class="video-frame"><video poster="https://carpool.tamu.edu/wp-content/uploads/2023/01/CarpoolCookies2016.jpg" preload="metadata" controls="controls" width="480" height="270">
+<source src="https://carpool.tamu.edu/wp-content/uploads/2023/02/What-is-CARPOOL.mp4" type="video/mp4" />
+Your browser does not support the video tag.
+</video></div>
+<figcaption class="video-caption">3-minute overview: how CARPOOL keeps Aggieland safe</figcaption></figure>
+
+
+
+
+</div>
+
+<section class="section how-it-works" aria-labelledby="hiw-heading">
+  <h2 id="hiw-heading">How It Works</h2>
+  <ol class="hiw-steps">
+    <li class="hiw-step-wrapper">
+      <span class="badge">1</span>
+      <div class="hiw-step">
+        <h3 class="hiw-title">Call CARPOOL</h3>
+        <p class="hiw-text">Dial (979) 693-9905 when you're ready to head home.</p>
+      </div>
+    </li>
+    <li class="hiw-step-wrapper">
+      <span class="badge">2</span>
+      <div class="hiw-step">
+        <h3 class="hiw-title">Volunteer picks you up</h3>
+        <p class="hiw-text">A student driver & navigator meet you at your location.</p>
+      </div>
+    </li>
+    <li class="hiw-step-wrapper">
+      <span class="badge">3</span>
+      <div class="hiw-step">
+        <h3 class="hiw-title">Get home safe</h3>
+        <p class="hiw-text">We'll take you home within Bryan/College Station for free.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+
+
+
+<section id="hours" class="section" aria-labelledby="hours-heading">
+<h2 id="hours-heading">Hours of Operation</h2>
+<div class="hours mt-6">
+<p class="big">Fridays & Saturdays • 10:00 pm – 3:00 am</p>
+<p class="note">While Texas A&M classes are in session. No service during summer months.
+Changes posted on Facebook & Instagram.</p>
+</div>
+</section>
+
+
+<section id="team-spotlight" class="team-spotlight" aria-labelledby="team-spotlight-title">
+  <h2 id="team-spotlight-title">Meet the Team</h2>
+  <!-- The JS will fill this -->
+  <div class="ts-stage" aria-live="polite"></div>
+
+  <!-- Optional controls (keyboard/hover will pause automatically) -->
+  <div class="ts-controls" hidden>
+    <button class="ts-prev" type="button" aria-label="Previous team member">‹</button>
+    <button class="ts-next" type="button" aria-label="Next team member">›</button>
+  </div>
+</section>
+
+<section class="cta-section" aria-labelledby="cta-title">
+  <div class="cta-shell">
+    <header class="cta-head">
+      <!-- META TAG REMOVED FROM HERE - IT BELONGS IN <HEAD>, NOT <BODY> -->
+      <p class="eyebrow">Need a safe ride?</p>
+      <h2 id="cta-title">We're here, lets get you home safely</h2>
+      <p class="sub">Free, safe rides for B/CS community members on nights CARPOOL operates.</p>
+    </header>
+
+    <!-- Primary actions -->
+    <ul class="cta-grid" role="list">
+      <li class="tile">
+        <a class="cta-tile cta-primary" href="tel:+19796939905" aria-label="Call CARPOOL">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" focusable="false" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.78.59 2.63a2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.27 1.73.47 2.63.59A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div class="cta-copy">
+            <strong>Call CARPOOL</strong>
+            <span class="meta">979-693-9905</span>
+          </div>
+        </a>
+      </li>
+
+      <li class="tile">
+        <a class="cta-tile cta-accent" href="/apply-for-carpool/" aria-label="Join CARPOOL">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" focusable="false" aria-hidden="true">
+              <path d="M15 14a5 5 0 1 0-6 0M4 21v-1a7 7 0 0 1 14 0v1M16 3v6M13 6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div class="cta-copy">
+            <strong>Join CARPOOL</strong>
+            <span class="meta">Volunteer sign-up & info</span>
+          </div>
+        </a>
+      </li>
+
+      <li class="tile">
+        <a class="cta-tile cta-neutral" href="/donate/" aria-label="Donate to CARPOOL">
+          <span class="cta-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" focusable="false" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div class="cta-copy">
+            <strong>Donate</strong>
+            <span class="meta">Keep rides free & safe</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+   <!-- Support row -->
+    <div class="cta-support">
+      <a class="chip" href="/faq/">FAQ</a>
+      <a class="chip" href="mailto:publicrelations.carpool@gmail.com">Contact</a>
+      <span class="spacer"></span>
+      <div class="cta-social">
+        <a class="social" href="https://www.instagram.com/tamucarpool/" aria-label="Instagram">@</a>
+        <a class="social" href="https://www.facebook.com/tamucarpool/" aria-label="Facebook">f</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Global Footer -->
+<footer itemscope itemtype="https://schema.org/WPFooter" style="background: #500000; color: #fff; padding: 48px 24px; text-align: center; margin: 60px 0 0 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-shadow: 0 -4px 20px rgba(0,0,0,.1);">
+  <div style="max-width: 1600px; margin: 0 auto;">
+    <p style="margin: 0 0 16px; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;">
+      <strong itemprop="name">CARPOOL</strong> - Student-run 501(c)(3) non-profit
+    </p>
+    <p style="margin: 0 0 20px; font-size: 15px; opacity: 0.95;">
+      Serving Bryan/College Station since 1999 • Over 297,588 free rides given
+    </p>
+    <p style="margin: 0 0 24px; font-size: 15px;">
+      <a href="tel:+19796939905" style="color: #fff; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.15); border-radius: 6px; display: inline-block; margin: 0 8px 8px 0; transition: background 0.2s;" itemprop="telephone">📞 Call: (979) 693-9905</a>
+      <a href="mailto:publicrelations.carpool@gmail.com" style="color: #fff; text-decoration: none; padding: 10px 20px; background: rgba(255,255,255,0.15); border-radius: 6px; display: inline-block; margin: 0 8px 8px 0; transition: background 0.2s;" itemprop="email">✉️ Email Us</a>
+    </p>
+    <div style="margin: 0; font-size: 14px; opacity: 0.95; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://carpool.tamu.edu/wp-content/uploads/2016/11/Logo_SGA.png" alt="Student Government Association Logo" style="height: 50px; width: auto; filter: brightness(0) invert(1);" />
+      <p style="margin: 0; text-align: center;">
+        CARPOOL is a member of the Student Government Association's (SGA) Executive Branch. For more information please see <a href="https://sga.tamu.edu" style="color: #fff; text-decoration: underline;" target="_blank" rel="noopener">sga.tamu.edu</a>.
+      </p>
+    </div>
+  </div>
+  <meta itemprop="copyrightHolder" content="CARPOOL">
+</footer>
+</div>
+</section>
+
+
+<script>
+/* ============================================================
+   CARPOOL — Homepage + Rewards (Inline/Avada-safe)
+   ============================================================ */
+(function () {
+  /* ---------------------------
+   Utility / DOM Ready
+  ----------------------------*/
+  function onReady(fn){ if(document.readyState!=="loading") fn(); else document.addEventListener("DOMContentLoaded", fn); }
+
+  /* ============================================================
+   HOMEPAGE LOGIC
+   ============================================================ */
+  (function HomePage() {
+    var TZ = 'America/Chicago';
+    var RUN_DAYS = [5,6 ]; // Fri, Sat  (FIXED)
+    var RUN_START = { h: 22, m: 0 }; // 10:00 PM
+    var RUN_END = { h: 3, m: 0 }; // 3:00 AM (next day)
+    var WD_DAYS = [6, 0]; // Sat, Sun
+    var WD_START = { h: 3, m: 0 };
+    var WD_END = { h: 6, m: 0 };
+    var OPEN_CFG = { days: [5, 6], start: "22:00", end: "03:00" };
+    var PREOPEN_FROM = "00:01";
+    var STAFF_PAGE_URL = "/staff/";
+    var ROTATE_MS = 7000;
+    var MAX_PEOPLE = 13;
+    var SHOW_CONTROLS = true;
+
+    var parts = function(d){
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: TZ, weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(d).reduce(function(a,p){ a[p.type]=p.value; return a; }, {});
+    };
+    var dayNum = function(w){ return ({ Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6 })[w] || 0; };
+    var toMin = function(h,m){ return h*60 + m; };
+    var minsOfWeek = function(d){ var p=parts(d); return dayNum(p.weekday)*1440 + (+p.hour)*60 + (+p.minute); };
+    var buildWindows = function(days, start, end, crossesMidnight){
+      return days.map(function(d){
+        var s = d*1440 + toMin(start.h, start.m);
+        var e = d*1440 + toMin(end.h, end.m);
+        if (crossesMidnight && e <= s) e += 1440;
+        return { s:s, e:e };
+      });
+    };
+    var inAny = function(wins, m){
+      var W = 7*1440, m2 = m + W;
+      return wins.some(function(w){ return (m >= w.s && m < w.e) || (m2 >= w.s && m2 < w.e); });
+    };
+
+    function animateRideCount(){
+      var el = document.getElementById("rideCount");
+      if (!el) return;
+      var parseNum = function(s){ return Number(String(s).replace(/[^\d.-]/g,"")) || 0; };
+      var target = parseNum(el.getAttribute("data-target") || el.textContent) || 0;
+      var duration = 5000;
+      var formatter = new Intl.NumberFormat("en-US");
+      var easeFancy = function(t){
+        t = Math.max(0, Math.min(1, t));
+        if (t < 0.35) {
+          var x = t / 0.35, k = 8;
+          return 0.60 * ((Math.exp(k * x) - 1) / (Math.exp(k) - 1));
+        }
+        var x2 = (t - 0.35) / 0.65, tailPow = 50;
+        return 0.60 + 0.40 * (1 - Math.pow(1 - x2, tailPow));
+      };
+      var hasRun = false;
+      var animate = function(){
+        if (hasRun) return; hasRun = true;
+        var t0 = performance.now();
+        var frame = function(now){
+          var t = Math.min(1, (now - t0)/duration);
+          var eased = easeFancy(t);
+          el.textContent = formatter.format(Math.floor(target * eased));
+          if (t < 1) requestAnimationFrame(frame);
+          else el.textContent = formatter.format(target);
+        };
+        requestAnimationFrame(frame);
+      };
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function(entries){
+          if (entries[0].isIntersecting) { io.disconnect(); animate(); }
+        }, { threshold: 0.3 });
+        io.observe(el);
+      } else { animate(); }
+    }
+
+    var RUN_WIN = buildWindows(RUN_DAYS, RUN_START, RUN_END, true);
+    var WD_WIN = buildWindows(WD_DAYS, WD_START, WD_END, false);
+
+    function statusNow(){
+      var m = minsOfWeek(new Date());
+      if (inAny(RUN_WIN, m)) return 'open';
+      if (inAny(WD_WIN, m)) return 'winddown';
+      return 'closed';
+    }
+
+    function modalLogic(){
+      var $cb = function(){ return document.getElementById('ride-modal-toggle'); };
+      var $o  = function(){ return document.getElementById('ride-card-open'); };
+      var $wd = function(){ return document.getElementById('ride-card-winddown'); };
+      var show = function(which){
+        var o = $o(), w = $wd(); if (!o || !w) return;
+        if (which === 'open')      { o.hidden=false; w.hidden=true; }
+        else if (which==='winddown'){ o.hidden=true;  w.hidden=false; }
+        else                       { o.hidden=true;  w.hidden=true; }
+      };
+      var dismissedState = sessionStorage.getItem('carpool-dismissed') || null;
+      var getDismissed = function(){ return dismissedState; };
+      var setDismissed = function(state){ dismissedState = state; sessionStorage.setItem('carpool-dismissed', state); };
+      var clearDismissed = function(){ dismissedState = null; sessionStorage.removeItem('carpool-dismissed'); };
+      var wireDismiss = function(){
+        var cb = $cb(); if (!cb) return;
+        cb.addEventListener('change', function(){
+          if (!cb.checked) {
+            var st = statusNow();
+            if (st === 'open' || st === 'winddown') setDismissed(st);
+          }
+        });
+      };
+      var prevState = null, timer = null;
+      var tick = function(){
+        var st = statusNow();
+        var cb = $cb(); if (!cb) return;
+        if (st !== prevState) { clearDismissed(); prevState = st; }
+        var dismissed = getDismissed();
+        if (st === 'open' || st === 'winddown') {
+          if (dismissed === st) { show('none'); cb.checked = false; }
+          else { show(st); cb.checked = true; setTimeout(function(){ (st === 'open' ? $o() : $wd()) && (st === 'open' ? $o() : $wd()).focus({ preventScroll:true }); }, 0); }
+        } else {
+          show('none'); cb.checked = false; clearDismissed();
+        }
+        clearTimeout(timer);
+        var now = new Date();
+        var ms = (60 - now.getSeconds())*1000 - now.getMilliseconds();
+        timer = setTimeout(tick, Math.max(250, ms));
+      };
+      var cb = $cb(); if (cb) cb.checked = false;
+      wireDismiss(); prevState = statusNow(); tick();
+      document.addEventListener('visibilitychange', function(){ if (!document.hidden) tick(); });
+    }
+
+    function bannerLogic(){
+      var W = 7*1440;
+      var toMinHHMM = function(hhmm){ var p = hhmm.split(":").map(Number); return (p[0]||0)*60 + (p[1]||0); };
+      var fmtTime12 = function(hhmm){
+        var p = hhmm.split(":").map(Number), h = p[0]||0, m = p[1]||0;
+        var ampm = h >= 12 ? "pm" : "am"; h = h % 12 || 12;
+        return h + (m ? ":"+String(m).padStart(2,"0") : "") + ampm;
+      };
+      var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      var daysFull = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      var dayShort = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      var dayLabel = OPEN_CFG.days.map(function(d){ return dayShort[d]; }).join(" & ");
+      var startMin = toMinHHMM(OPEN_CFG.start), endMin = toMinHHMM(OPEN_CFG.end);
+      var windows = OPEN_CFG.days.map(function(d){
+        var s = d*1440 + startMin;
+        var e = d*1440 + (endMin <= startMin ? endMin + 1440 : endMin);
+        return { s:s, e:e };
+      });
+      var box = document.querySelector(".carpool-banner .banner-text"); if (!box) return;
+      var wrap = box.closest(".carpool-banner");
+
+      var isOpenNow = function(d){
+        d = d || new Date();
+        var m = minsOfWeek(d), m2 = m + W;
+        return windows.some(function(w){ return (m >= w.s && m < w.e) || (m2 >= w.s && m2 < w.e); });
+      };
+      var isPreOpenToday = function(d){
+        d = d || new Date();
+        var today = d.getDay();
+        if (OPEN_CFG.days.indexOf(today) === -1) return false;
+        var minsToday = d.getHours()*60 + d.getMinutes();
+        var preFrom = toMinHHMM(PREOPEN_FROM);
+        return minsToday >= preFrom && minsToday < startMin;
+      };
+      var nextOpenDate = function(d){
+        d = d || new Date();
+        var m = minsOfWeek(d);
+        var starts = windows.reduce(function(acc,w){ acc.push(w.s, w.s + W); return acc; }, []).filter(function(s){ return s >= m; });
+        var ns = Math.min.apply(null, starts);
+        var sow = new Date(d); sow.setHours(0,0,0,0); sow.setDate(sow.getDate() - sow.getDay());
+        return new Date(sow.getTime() + ns*60000);
+      };
+      var formatDayMonthTime = function(dt){
+        var mon = months[dt.getMonth()], dom = dt.getDate(), dow = daysFull[dt.getDay()];
+        var h = dt.getHours(), m = dt.getMinutes(), ampm = h >= 12 ? "pm" : "am"; h = h % 12 || 12;
+        var mins = m ? ":" + String(m).padStart(2,"0") : "";
+        return dow + ", " + mon + " " + dom + " at " + h + mins + ampm;
+      };
+
+      var lastStatus = null;
+      var updateBanner = function(){
+        var open = isOpenNow(), pre = isPreOpenToday();
+        var status = open ? "open" : (pre ? "pre" : "closed");
+        if (status === lastStatus) return; lastStatus = status;
+
+        if (open) {
+          wrap.classList.add("success"); wrap.classList.remove("error");
+          box.innerHTML = "<strong>Service Status:</strong> We're <strong>running now</strong> (" + dayLabel + ", " + fmtTime12(OPEN_CFG.start) + "–" + fmtTime12(OPEN_CFG.end) + ").";
+        } else if (pre) {
+          var start = new Date();
+          var sp = OPEN_CFG.start.split(":");
+          start.setHours(Number(sp[0]||0), Number(sp[1]||0), 0, 0);
+          wrap.classList.add("success"); wrap.classList.remove("error");
+          box.innerHTML = "<strong>Service Status:</strong> We will be running <strong>today, " + formatDayMonthTime(start) + "</strong>.";
+        } else {
+          var next = nextOpenDate();
+          wrap.classList.add("error"); wrap.classList.remove("success");
+          box.innerHTML = '<strong>Service Status:</strong> Not currently running! We next offer rides on <strong>' + formatDayMonthTime(next) + '</strong> (' + dayLabel + ', ' + fmtTime12(OPEN_CFG.start) + '–' + fmtTime12(OPEN_CFG.end) + ').';
+        }
+      };
+      updateBanner();
+      setInterval(updateBanner, 60000);
+    }
+
+    function teamSpotlight(){
+      var host = document.getElementById("team-spotlight"); if (!host) return;
+      var stage = host.querySelector(".ts-stage");
+      var ctrls = host.querySelector(".ts-controls");
+      var el = function(t, c, a){ var n=document.createElement(t); if(c) n.className=c; a=a||{}; for (var k in a) if (Object.prototype.hasOwnProperty.call(a,k)) n.setAttribute(k,a[k]); return n; };
+      var extractFromCardAndSheet = function(card, root){
+        var img = card.querySelector("img, .avatar");
+        var name = card.querySelector(".name, h3, .title");
+        var role = card.querySelector(".role");
+        var sheetLink = card.querySelector('.name a[href^="#sheet-"]') || card.querySelector('a[href^="#sheet-"]');
+        var facts = [];
+        if (sheetLink) {
+          var id = sheetLink.getAttribute("href").slice(1);
+          var sheet = root.getElementById(id);
+          if (sheet) {
+            var infoPs = sheet.querySelectorAll(".sheet-info p");
+            facts = Array.prototype.slice.call(infoPs).map(function(p){
+              var strong = p.querySelector("strong");
+              var key = strong ? strong.textContent.replace(/:\s*$/, "").trim() : "";
+              var val = p.textContent.replace(strong && strong.textContent || "", "").trim();
+              if (val.indexOf(":") === 0) val = val.slice(1).trim();
+              return (key && val) ? { k:key, v:val } : null;
+            }).filter(Boolean);
+          }
+        }
+        return {
+          name: (name && name.textContent && name.textContent.trim()) || "Staff member",
+          role: (role && role.textContent && role.textContent.trim()) || "",
+          photo: (img && img.getAttribute("src")) || "",
+          email: (card.querySelector('a[href^="mailto:"]') && card.querySelector('a[href^="mailto:"]').getAttribute("href")) || "",
+          facts: facts
+        };
+      };
+      var buildSlide = function(p){
+        var slide = el("article", "ts-slide", { role:"group", "aria-roledescription":"slide" });
+        var img = el("img", "ts-photo", { alt: p.name || "Staff photo" }); img.src = p.photo || ""; slide.appendChild(img);
+        var info = el("div", "ts-info");
+        var h3 = el("h3", "ts-name"); h3.textContent = p.name;
+        var r = el("p", "ts-role"); r.textContent = p.role;
+        info.appendChild(h3); info.appendChild(r);
+        if (p.facts && p.facts.length){
+          var factsWrap = el("div", "ts-facts");
+          p.facts.forEach(function(f){ var row = el("div","ts-fact"); var kk = el("div","k"); kk.textContent=f.k; var vv = el("div","v"); vv.textContent=f.v; row.appendChild(kk); row.appendChild(vv); factsWrap.appendChild(row); });
+          info.appendChild(factsWrap);
+        }
+        var actions = el("div", "ts-actions");
+        if (p.email) { var a = el("a","ts-btn",{href:p.email,"aria-label":"Email "+p.name}); a.textContent="Email"; actions.appendChild(a); }
+        var all = el("a","ts-btn",{href:"/staff/","aria-label":"View all staff"}); all.textContent="View all staff"; actions.appendChild(all);
+        info.appendChild(actions); slide.appendChild(info); return slide;
+      };
+      var rotator = function(slides, opts){
+        opts = opts || {}; var interval = opts.interval || ROTATE_MS;
+        if (!slides.length) return;
+        var i=0, timer=null, paused=false;
+        var show = function(idx){
+          slides.forEach(function(s, n){
+            s.classList.toggle("is-active", n===idx);
+            s.style.transition = 'opacity .4s ease, transform .4s ease';
+            s.style.opacity = n===idx ? 1 : 0;
+            s.style.transform = n===idx ? 'translateY(0)' : 'translateY(10px)';
+          });
+        };
+        var next = function(){ i=(i+1)%slides.length; show(i); };
+        var prev = function(){ i=(i-1+slides.length)%slides.length; show(i); };
+        var start = function(){ stop(); if (slides.length<2) return; timer=setInterval(function(){ if(!paused) next(); }, interval); };
+        var stop = function(){ if (timer){ clearInterval(timer); timer=null; } };
+        if (ctrls) {
+          var prevBtn = ctrls.querySelector(".ts-prev");
+          var nextBtn = ctrls.querySelector(".ts-next");
+          if (prevBtn) prevBtn.addEventListener("click", function(e){ e.preventDefault(); prev(); });
+          if (nextBtn) nextBtn.addEventListener("click", function(e){ e.preventDefault(); next(); });
+          ctrls.hidden = !SHOW_CONTROLS;
+        }
+        var stageEl = slides[0].parentElement;
+        stageEl.addEventListener("mouseenter", function(){ paused=true; });
+        stageEl.addEventListener("mouseleave", function(){ paused=false; });
+        stageEl.addEventListener("keydown", function(e){ if (e.key==="ArrowRight"){ e.preventDefault(); next(); } if (e.key==="ArrowLeft"){ e.preventDefault(); prev(); } });
+        stageEl.tabIndex = 0;
+        show(0); start();
+        return { show:show, next:next, prev:prev, start:start, stop:stop };
+      };
+      var harvestLocal = function(){
+        var root = document;
+        var cards = Array.prototype.slice.call(root.querySelectorAll("#carpool-staff .grid .card"));
+        return cards.map(function(c){ return extractFromCardAndSheet(c, root); });
+      };
+      var harvestRemote = function(){
+        return fetch(STAFF_PAGE_URL, { credentials:"same-origin" })
+          .then(function(res){ if (!res.ok) throw new Error("Fetch failed"); return res.text(); })
+          .then(function(html){
+            var doc = new DOMParser().parseFromString(html, "text/html");
+            var cards = Array.prototype.slice.call(doc.querySelectorAll("#carpool-staff .grid .card"));
+            return cards.map(function(c){ return extractFromCardAndSheet(c, doc); });
+          })
+          .catch(function(){ return []; });
+      };
+      var init = function(){
+        if (!stage) return;
+        stage.innerHTML = '<div class="ts-loading" style="text-align:center;padding:20px;color:#6b7280;">Loading team...</div>';
+        var people = harvestLocal();
+        var proceed = function(list){
+          stage.querySelector('.ts-loading') && stage.querySelector('.ts-loading').remove();
+          if (!list.length) {
+            stage.innerHTML = '<div class="ts-slide is-active"><div class="ts-info"><h3 class="ts-name">Our Student Leaders</h3><p class="ts-role">Meet the volunteers behind CARPOOL.</p><div class="ts-actions"><a class="ts-btn" href="/staff/">View all staff</a></div></div></div>';
+            return;
+          }
+          if (MAX_PEOPLE) list = list.slice(0, MAX_PEOPLE);
+          var slides = list.map(buildSlide);
+          slides.forEach(function(s){ stage.appendChild(s); });
+          rotator(slides, { interval: ROTATE_MS });
+        };
+        if (people.length) proceed(people);
+        else harvestRemote().then(proceed);
+      };
+      init();
+    }
+
+    function factsToggle(){
+      var root = document.querySelector('#team-spotlight'); if (!root) return;
+      var factsBlocks = root.querySelectorAll('.ts-facts');
+      var isOverflowing = function(el){ return (el.scrollHeight - el.clientHeight) > 2; };
+      var updateMaskAndToggle = function(facts, btn){
+        var overflowing = isOverflowing(facts) && !facts.classList.contains('ts--expanded');
+        facts.classList.toggle('ts--masked', overflowing);
+        btn.style.display = isOverflowing(facts) ? 'block' : 'none';
+      };
+      var ro = new ResizeObserver(function(entries){
+        entries.forEach(function(entry){
+          var facts = entry.target; var btn = facts.nextElementSibling;
+          if (btn && btn.classList.contains('ts-toggle')) updateMaskAndToggle(facts, btn);
+        });
+      });
+      factsBlocks.forEach(function(facts){
+        var btn = facts.nextElementSibling;
+        if (!btn || !btn.classList || !btn.classList.contains('ts-toggle')) {
+          btn = document.createElement('button');
+          btn.type = 'button'; btn.className = 'ts-toggle'; btn.setAttribute('aria-expanded','false'); btn.textContent='Show more';
+          facts.insertAdjacentElement('afterend', btn);
+          btn.addEventListener('click', function(){
+            var expanded = facts.classList.toggle('ts--expanded');
+            btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            btn.textContent = expanded ? 'Show less' : 'Show more';
+            if (!expanded) facts.scrollTo({ top:0, behavior:'smooth' });
+            updateMaskAndToggle(facts, btn);
+          });
+        }
+        updateMaskAndToggle(facts, btn); ro.observe(facts);
+      });
+    }
+
+    function cleanCTA(){
+      var clean = function(grid){
+        Array.from(grid.childNodes).forEach(function(n){ if (n.nodeType !== 1) grid.removeChild(n); });
+        Array.from(grid.children).forEach(function(el){
+          if (!el.classList.contains('tile') || !el.querySelector('.cta-tile')) el.remove();
+        });
+      };
+      document.querySelectorAll('.cta-grid').forEach(clean);
+    }
+
+    (function injectAOSKeyframes(){
+  if (document.documentElement.classList.contains('aos-kf-ready')) return;
+  document.documentElement.classList.add('aos-kf-ready');
+  var css = '\
+        @keyframes fadeInUp { 0% { opacity:0; transform: translate3d(0,25px,0) scale(.95); } 100%{ opacity:1; transform: translate3d(0,0,0) scale(1); } }\
+        @keyframes fadeInUpBounce { 0%{ opacity:0; transform: translate3d(0,30px,0) scale(.9);} 60%{ opacity:1; transform: translate3d(0,-6px,0) scale(1.02);} 100%{ opacity:1; transform: translate3d(0,0,0) scale(1);} }\
+        @keyframes fadeInScale { 0% { opacity:0; transform: translate3d(0,15px,0) scale(.98);} 100%{ opacity:1; transform: translate3d(0,0,0) scale(1);} }\
+        @keyframes slideInLeft { 0% { opacity:0; transform: translate3d(-20px,0,0) scale(.98);} 100%{ opacity:1; transform: translate3d(0,0,0) scale(1);} }';
+  var s = document.createElement('style'); s.textContent = css; (document.head || document.body).appendChild(s);
+})();
+
+
+    function animateOnScroll(){
+      if (!("IntersectionObserver" in window)) return;
+      var elements = document.querySelectorAll('.info-grid > .card, .info-grid > .video-wrap, .cta-grid .tile, .how-it-works .hiw-step-wrapper, #hours .hours, #team-spotlight, .team-spotlight .ts-stage, .carpool-banner, .hero-highlight');
+      var isMobile = window.matchMedia("(max-width: 700px)").matches;
+      var rootStyle = getComputedStyle(document.documentElement);
+      var baseDuration = parseFloat(rootStyle.getPropertyValue('--anim-duration')) || 1.0;
+      var baseStagger = parseFloat(rootStyle.getPropertyValue('--anim-stagger')) || 0.1;
+      var duration = isMobile ? baseDuration * 0.8 : baseDuration;
+      var stagger = isMobile ? baseStagger * 0.6 : baseStagger;
+      var willChangeResetDelay = duration * 1000 + 100;
+      var observer = new IntersectionObserver(function(entries, obs){
+        entries.forEach(function(entry, index){
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            // 🔥 Sync video and card animation inside .info-grid
+if (el.closest('.info-grid')) {
+  const siblings = el.closest('.info-grid').querySelectorAll('.card, .video-wrap');
+  siblings.forEach(sib => {
+    sib.style.animation = 'fadeInUp ' + duration + 's cubic-bezier(0.4, 0, 0.2, 1) forwards';
+    sib.style.willChange = 'opacity, transform';
+    setTimeout(() => { sib.style.willChange = 'auto'; }, willChangeResetDelay);
+    obs.unobserve(sib);
+  });
+  return; // skip rest for this group
+}
+
+            if (el.matches('.how-it-works .hiw-step-wrapper')) {
+              el.style.animation = 'fadeInUpBounce ' + duration + 's cubic-bezier(0.34, 1.56, 0.64, 1) ' + (index*stagger) + 's forwards';
+            } else if (el.matches('#team-spotlight, .team-spotlight .ts-stage')) {
+              el.style.animation = 'fadeInScale ' + (duration*0.8) + 's cubic-bezier(0.25, 0.46, 0.45, 0.94) ' + (index*stagger) + 's forwards';
+            } else if (el.matches('#hours .hours')) {
+              el.style.animation = 'slideInLeft ' + duration + 's cubic-bezier(0.25, 0.46, 0.45, 0.94) ' + (index*stagger) + 's forwards';
+            } else {
+              el.style.animation = 'fadeInUp ' + duration + 's cubic-bezier(0.4, 0, 0.2, 1) ' + (index*stagger) + 's forwards';
+            }
+            el.style.willChange = 'opacity, transform';
+            setTimeout(function(){ el.style.willChange = 'auto'; }, willChangeResetDelay);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: isMobile ? 0.08 : 0.12, rootMargin: '0px 0px 10px 0px' });
+      elements.forEach(function(el){
+        el.style.opacity = 0; el.style.transform = 'translateY(25px) scale(0.95)';
+        if (el.matches('.how-it-works .hiw-step-wrapper')) el.style.transform = 'translateY(30px) scale(0.9)';
+        else if (el.matches('#team-spotlight, .team-spotlight .ts-stage')) el.style.transform = 'translateY(15px) scale(0.98)';
+        else if (el.matches('#hours .hours')) el.style.transform = 'translateX(-20px) scale(0.98)';
+        observer.observe(el);
+      });
+    }
+
+    onReady(function(){
+      setTimeout(function(){
+        animateRideCount();
+        modalLogic();
+        bannerLogic();
+        teamSpotlight();
+        factsToggle();
+        cleanCTA();
+        animateOnScroll();
+      }, 100);
+    });
+  })();
+})();
+</script>
