@@ -12,63 +12,269 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
     }
   }
 
-  // Create Christmas-Themed Stars Background with Red & Green Tints
-  function createChristmasStars(){
+  // Create Hanging Christmas Light Strings
+  function createChristmasLights(){
     var section = document.querySelector('.carpool-landing');
     if (!section) {
       console.warn('[CARPOOL] .carpool-landing section not found');
       return;
     }
 
-    console.log('[CARPOOL] Creating Christmas starfield with festive colors');
+    console.log('[CARPOOL] Creating hanging Christmas light strings');
 
-    var starsContainer = document.createElement('div');
-    starsContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:hidden;';
-    starsContainer.id = 'stars-container';
+    var lightsContainer = document.createElement('div');
+    lightsContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:200px;pointer-events:none;z-index:20;overflow:visible;';
+    lightsContainer.id = 'lights-container';
 
-    // Generate 80 stars with Christmas colors
-    for (var i = 0; i < 80; i++) {
-      var star = document.createElement('div');
-      var size = Math.random() < 0.7 ? '2px' : (Math.random() < 0.9 ? '3px' : '4px');
-      var x = Math.random() * 100;
-      var y = Math.random() * 100;
-      var opacity = 0.3 + Math.random() * 0.7;
-      var delay = Math.random() * 4;
+    // Create 8 light strings across the top
+    for (var i = 0; i < 8; i++) {
+      var lightString = document.createElement('div');
+      var leftPos = (i * 12.5) + 6;
+      var swayDelay = i * 0.5;
 
-      // Christmas color palette for stars: gold, white, red, green
-      var colors = [
-        'rgba(255,215,0,0.9)',     // Gold
-        'rgba(255,255,255,0.9)',   // White
-        'rgba(255,255,240,0.95)',  // Warm white
-        'rgba(255,223,0,0.8)',     // Light gold
-        'rgba(196,30,58,0.7)',     // Christmas red
-        'rgba(22,91,51,0.7)',      // Christmas green
-        'rgba(220,20,60,0.75)',    // Crimson
-        'rgba(39,174,96,0.7)'      // Forest green
-      ];
-      var color = colors[Math.floor(Math.random() * colors.length)];
+      lightString.style.cssText = 'position:absolute;top:-10px;left:' + leftPos + '%;width:2px;height:150px;background:rgba(255,255,255,0.1);transform-origin:top center;animation:sway ' + (4 + Math.random() * 2) + 's ease-in-out infinite ' + swayDelay + 's;';
 
-      star.style.cssText = 'position:absolute;width:' + size + ';height:' + size + ';background:' + color + ';border-radius:50%;box-shadow:0 0 6px ' + color + ', 0 0 12px ' + color + ';left:' + x + '%;top:' + y + '%;opacity:' + opacity + ';animation:twinkleStar ' + (2 + Math.random() * 3) + 's ease-in-out infinite ' + delay + 's;';
-      starsContainer.appendChild(star);
+      // Add 5-7 lights to each string
+      var numLights = 5 + Math.floor(Math.random() * 3);
+      for (var j = 0; j < numLights; j++) {
+        var light = document.createElement('div');
+        var lightColors = ['#c41e3a', '#165b33', '#ffd700', '#ff4757', '#27ae60', '#ff6b6b', '#4ecdc4'];
+        var color = lightColors[Math.floor(Math.random() * lightColors.length)];
+        var topPos = 20 + (j * 25);
+        var pulseDelay = Math.random() * 3;
+
+        light.style.cssText = 'position:absolute;top:' + topPos + 'px;left:-4px;width:10px;height:10px;background:' + color + ';border-radius:50%;box-shadow:0 0 10px ' + color + ', 0 0 20px ' + color + ';animation:bulbPulse ' + (1 + Math.random()) + 's ease-in-out infinite ' + pulseDelay + 's;';
+
+        lightString.appendChild(light);
+      }
+
+      lightsContainer.appendChild(lightString);
     }
 
-    var section = document.querySelector('.carpool-landing');
-    if (section) {
-      section.insertBefore(starsContainer, section.firstChild);
-    }
+    section.insertBefore(lightsContainer, section.firstChild);
 
-    // Add star twinkle animation with more sparkle
-    if (!document.getElementById('star-animations')) {
+    // Add animations
+    if (!document.getElementById('light-animations')) {
       var style = document.createElement('style');
-      style.id = 'star-animations';
-      style.textContent = '@keyframes twinkleStar { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 20px currentColor; } }';
+      style.id = 'light-animations';
+      style.textContent = `
+        @keyframes sway {
+          0%, 100% { transform: rotate(-2deg); }
+          50% { transform: rotate(2deg); }
+        }
+        @keyframes bulbPulse {
+          0%, 100% { opacity: 0.8; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 15px currentColor, 0 0 30px currentColor; }
+        }
+      `;
       document.head.appendChild(style);
     }
 
-    console.log('[CARPOOL] Christmas starfield created with festive colors');
+    console.log('[CARPOOL] Christmas light strings created');
   }
 
-  // Create Falling Snowflakes (Reduced amount)
+  // Create Floating Bokeh Light Circles (like out-of-focus Christmas lights)
+  function createBokehLights(){
+    var section = document.querySelector('.carpool-landing');
+    if (!section) {
+      console.warn('[CARPOOL] .carpool-landing not found');
+      return;
+    }
+
+    console.log('[CARPOOL] Creating bokeh light effect');
+
+    var bokehContainer = document.createElement('div');
+    bokehContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;overflow:hidden;';
+    bokehContainer.id = 'bokeh-container';
+    section.appendChild(bokehContainer);
+
+    function createBokehCircle() {
+      var bokeh = document.createElement('div');
+      var size = 40 + Math.random() * 120;
+      var startX = Math.random() * 100;
+      var startY = 100 + Math.random() * 20;
+      var duration = 15 + Math.random() * 20;
+      var delay = Math.random() * 5;
+      var drift = (Math.random() - 0.5) * 30;
+
+      var colors = [
+        'rgba(196, 30, 58, 0.3)',
+        'rgba(22, 91, 51, 0.3)',
+        'rgba(255, 215, 0, 0.35)',
+        'rgba(255, 71, 87, 0.25)',
+        'rgba(39, 174, 96, 0.3)',
+        'rgba(220, 20, 60, 0.25)',
+        'rgba(255, 255, 255, 0.2)'
+      ];
+      var color = colors[Math.floor(Math.random() * colors.length)];
+
+      bokeh.style.cssText = 'position:absolute;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + color + ';left:' + startX + '%;top:' + startY + '%;filter:blur(' + (8 + Math.random() * 12) + 'px);opacity:0;pointer-events:none;';
+
+      var animId = 'bokeh-' + Math.random().toString(36).substr(2, 9);
+      var style = document.createElement('style');
+      style.textContent = `
+        @keyframes ${animId} {
+          0% {
+            transform: translateY(0) translateX(0) scale(0.8);
+            opacity: 0;
+          }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% {
+            transform: translateY(-120vh) translateX(${drift}vw) scale(1.2);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      bokeh.style.animation = animId + ' ' + duration + 's ease-in-out ' + delay + 's';
+      bokehContainer.appendChild(bokeh);
+
+      setTimeout(function() {
+        bokeh.remove();
+        style.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Create initial bokeh circles
+    for (var i = 0; i < 15; i++) {
+      setTimeout(createBokehCircle, i * 1000);
+    }
+
+    // Keep creating new ones
+    setInterval(createBokehCircle, 3000);
+
+    console.log('[CARPOOL] Bokeh light effect initialized');
+  }
+
+  // Create Floating Glitter/Confetti Particles
+  function createGlitterParticles(){
+    var section = document.querySelector('.carpool-landing');
+    if (!section) {
+      console.warn('[CARPOOL] .carpool-landing not found');
+      return;
+    }
+
+    console.log('[CARPOOL] Creating glitter particles');
+
+    var glitterContainer = document.createElement('div');
+    glitterContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:hidden;';
+    glitterContainer.id = 'glitter-container';
+    section.appendChild(glitterContainer);
+
+    function createGlitter() {
+      var glitter = document.createElement('div');
+      var size = 2 + Math.random() * 4;
+      var startX = Math.random() * 100;
+      var duration = 3 + Math.random() * 4;
+      var delay = Math.random() * 2;
+      var rotation = Math.random() * 360;
+      var drift = (Math.random() - 0.5) * 50;
+
+      var glitterShapes = ['◆', '✦', '✧', '❋', '✴', '◈'];
+      var shape = glitterShapes[Math.floor(Math.random() * glitterShapes.length)];
+
+      var colors = ['#ffd700', '#c41e3a', '#165b33', '#ffffff', '#ff6b6b', '#27ae60'];
+      var color = colors[Math.floor(Math.random() * colors.length)];
+
+      glitter.innerHTML = shape;
+      glitter.style.cssText = 'position:absolute;left:' + startX + '%;top:-20px;font-size:' + size + 'px;color:' + color + ';opacity:0;pointer-events:none;text-shadow:0 0 3px currentColor;';
+
+      var animId = 'glitter-' + Math.random().toString(36).substr(2, 9);
+      var style = document.createElement('style');
+      style.textContent = `
+        @keyframes ${animId} {
+          0% {
+            transform: translateY(0) translateX(0) rotate(${rotation}deg);
+            opacity: 0;
+          }
+          10% { opacity: 0.9; }
+          90% { opacity: 0.9; }
+          100% {
+            transform: translateY(100vh) translateX(${drift}px) rotate(${rotation + 720}deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      glitter.style.animation = animId + ' ' + duration + 's linear ' + delay + 's';
+      glitterContainer.appendChild(glitter);
+
+      setTimeout(function() {
+        glitter.remove();
+        style.remove();
+      }, (duration + delay) * 1000);
+    }
+
+    // Create glitter particles
+    for (var i = 0; i < 20; i++) {
+      setTimeout(createGlitter, i * 500);
+    }
+
+    setInterval(createGlitter, 2000);
+
+    console.log('[CARPOOL] Glitter particles initialized');
+  }
+
+  // Create Gently Bobbing Ornaments
+  function createFloatingOrnaments(){
+    var section = document.querySelector('.carpool-landing');
+    if (!section) {
+      console.warn('[CARPOOL] .carpool-landing not found');
+      return;
+    }
+
+    console.log('[CARPOOL] Creating floating ornaments');
+
+    var ornamentContainer = document.createElement('div');
+    ornamentContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:12;overflow:hidden;';
+    ornamentContainer.id = 'ornament-container';
+    section.appendChild(ornamentContainer);
+
+    // Create 6 gently bobbing ornaments at various positions
+    var positions = [
+      {x: 10, y: 20},
+      {x: 25, y: 45},
+      {x: 40, y: 15},
+      {x: 60, y: 50},
+      {x: 75, y: 30},
+      {x: 90, y: 40}
+    ];
+
+    positions.forEach(function(pos, index) {
+      var ornament = document.createElement('div');
+      var size = 25 + Math.random() * 20;
+      var bobDelay = index * 0.7;
+      var bobDuration = 3 + Math.random() * 2;
+
+      var ornamentEmojis = ['🔴', '🟢', '🟡', '🔵', '🟣', '🟠'];
+      var emoji = ornamentEmojis[index % ornamentEmojis.length];
+
+      ornament.innerHTML = emoji;
+      ornament.style.cssText = 'position:absolute;left:' + pos.x + '%;top:' + pos.y + '%;font-size:' + size + 'px;animation:gentleBob ' + bobDuration + 's ease-in-out infinite ' + bobDelay + 's;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));opacity:0.7;';
+
+      ornamentContainer.appendChild(ornament);
+    });
+
+    // Add bob animation
+    if (!document.getElementById('ornament-animations')) {
+      var style = document.createElement('style');
+      style.id = 'ornament-animations';
+      style.textContent = `
+        @keyframes gentleBob {
+          0%, 100% { transform: translateY(0) rotate(-2deg); }
+          50% { transform: translateY(-15px) rotate(2deg); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    console.log('[CARPOOL] Floating ornaments created');
+  }
+
+  // Create Falling Snowflakes (keep this from before)
   function createSnowfall() {
     var section = document.querySelector('.carpool-landing');
     if (!section) {
@@ -106,7 +312,7 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       snowContainer.appendChild(snowflake);
     }
 
-    // Create 30 snowflakes (reduced from 50)
+    // Create 30 snowflakes
     for (var i = 0; i < 30; i++) {
       createSnowflake();
     }
@@ -231,21 +437,6 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       setTimeout(function(){ gift.remove(); }, duration * 1000);
     }
 
-    // Ornament
-    function createOrnament() {
-      var ornament = document.createElement('div');
-      var startY = Math.random() * 40 + 20;
-      var duration = 28 + Math.random() * 10;
-      var size = 20 + Math.random() * 12;
-
-      var ornamentTypes = ['🔴', '🟢', '🟡'];
-      ornament.innerHTML = ornamentTypes[Math.floor(Math.random() * ornamentTypes.length)];
-      ornament.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatOrnament ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 6px rgba(255,215,0,0.5));';
-
-      decorContainer.appendChild(ornament);
-      setTimeout(function(){ ornament.remove(); }, duration * 1000);
-    }
-
     // Star
     function createStar() {
       var star = document.createElement('div');
@@ -273,16 +464,6 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
         100% { transform: translateX(105vw) translateY(0) rotate(360deg); opacity: 0; }
       }
 
-      @keyframes floatOrnament {
-        0% { transform: translateX(0) translateY(0) rotate(-10deg); opacity: 0; }
-        5% { opacity: 0.9; }
-        25% { transform: translateX(25vw) translateY(-15px) rotate(5deg); }
-        50% { transform: translateX(50vw) translateY(15px) rotate(-10deg); }
-        75% { transform: translateX(75vw) translateY(-10px) rotate(5deg); }
-        95% { opacity: 0.9; }
-        100% { transform: translateX(105vw) translateY(0) rotate(-10deg); opacity: 0; }
-      }
-
       @keyframes sparkleAnim {
         0% { opacity: 0; transform: scale(0) rotate(0deg); }
         50% { opacity: 1; transform: scale(1.5) rotate(180deg); }
@@ -292,17 +473,15 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
     document.head.appendChild(style);
 
     // Reduced intervals - much less frequent
-    setInterval(createSparkle, 8000);        // Every 8 seconds (was 3)
-    setInterval(createChristmasTree, 25000); // Every 25 seconds (was 12)
-    setInterval(createGift, 20000);          // Every 20 seconds (was 10)
-    setInterval(createOrnament, 18000);      // Every 18 seconds (was 8)
-    setInterval(createStar, 22000);          // Every 22 seconds (was 9)
+    setInterval(createSparkle, 8000);
+    setInterval(createChristmasTree, 25000);
+    setInterval(createGift, 20000);
+    setInterval(createStar, 22000);
 
     // Initial decorations with staggered delays
     setTimeout(createSparkle, 2000);
     setTimeout(createChristmasTree, 5000);
     setTimeout(createGift, 8000);
-    setTimeout(createOrnament, 11000);
     setTimeout(createStar, 14000);
 
     console.log('[CARPOOL] Christmas decorations initialized (reduced frequency)');
@@ -311,9 +490,12 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
   // Run when DOM is ready
   onReady(function(){
     console.log('[CARPOOL] DOM ready - creating Christmas effects');
-    createChristmasStars();
+    createChristmasLights();      // NEW: Hanging light strings
+    createBokehLights();           // NEW: Floating bokeh circles
+    createGlitterParticles();      // NEW: Falling glitter
+    createFloatingOrnaments();     // NEW: Bobbing ornaments
     createSnowfall();
-    createSantaSleigh();  // Runs once at load
+    createSantaSleigh();
     initChristmasDecorations();
   });
 
