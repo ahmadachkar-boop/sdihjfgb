@@ -1,50 +1,56 @@
 /* ========================================
-   HALLOWEEN THEME OVERRIDE FOR CARPOOL HOMEPAGE
+   CHRISTMAS THEME OVERRIDE FOR CARPOOL HOMEPAGE
 
    Usage: Paste this entire file into Avada → Theme Options → Custom CSS
 
-   To activate Halloween theme: Add this CSS
+   To activate Christmas theme: Add this CSS
    To deactivate: Remove this CSS from Custom CSS field
 
    Without this CSS, the page will display the professional
    neutral theme with light gray backgrounds and maroon accents.
+
+   🎄 Ho Ho Ho! Merry Christmas! 🎅
    ======================================== */
 
-/* Halloween Color Variables Override */
+/* Christmas Color Variables Override */
 :root {
-  /* Halloween color palette */
-  --accent: #ff6b00 !important; /* Bright Halloween orange */
-  --accent-light: #ff8c00 !important;
-  --accent-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%) !important;
-  --bg: #1a0a2e !important; /* Deep dark purple */
+  /* Christmas color palette */
+  --accent: #c41e3a !important; /* Christmas red */
+  --accent-light: #dc143c !important;
+  --accent-green: #165b33 !important; /* Forest green */
+  --accent-gold: #ffd700 !important; /* Gold accent */
+  --bg: #0c1f33 !important; /* Deep winter night blue */
   --text: #ffffff !important;
-  --muted: #b8a4c9 !important;
-  --muted-accessible: #9d88b3 !important;
-  --card: #2d1b4e !important;
+  --muted: #c9d6df !important;
+  --muted-accessible: #b0c4d8 !important;
+  --card: #f8f9fa !important; /* Snow white cards */
 
-  /* BOLD Halloween gradients */
-  --gradient-primary: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%) !important;
-  --gradient-soft: linear-gradient(135deg, rgba(255,107,0,0.9) 0%, rgba(138,43,226,0.4) 100%) !important;
-  --gradient-mesh: radial-gradient(at 20% 30%, rgba(255,107,0,0.4) 0, transparent 40%),
-                   radial-gradient(at 80% 20%, rgba(138,43,226,0.5) 0, transparent 45%),
-                   radial-gradient(at 40% 80%, rgba(255,140,0,0.35) 0, transparent 40%),
-                   radial-gradient(at 90% 70%, rgba(75,0,130,0.4) 0, transparent 45%),
-                   linear-gradient(135deg, #0f0520 0%, #1a0a2e 50%, #2d1550 100%) !important;
+  /* FESTIVE Christmas gradients */
+  --gradient-primary: linear-gradient(135deg, #c41e3a 0%, #dc143c 50%, #ff4757 100%) !important;
+  --gradient-green: linear-gradient(135deg, #165b33 0%, #0f7f3f 50%, #27ae60 100%) !important;
+  --gradient-gold: linear-gradient(135deg, #c5a572 0%, #ffd700 50%, #ffed4e 100%) !important;
+  --gradient-soft: linear-gradient(135deg, rgba(196,30,58,0.15) 0%, rgba(22,91,51,0.15) 100%) !important;
+  --gradient-mesh: radial-gradient(at 20% 30%, rgba(196,30,58,0.3) 0, transparent 40%),
+                   radial-gradient(at 80% 20%, rgba(22,91,51,0.35) 0, transparent 45%),
+                   radial-gradient(at 40% 80%, rgba(255,215,0,0.25) 0, transparent 40%),
+                   radial-gradient(at 90% 70%, rgba(220,20,60,0.3) 0, transparent 45%),
+                   linear-gradient(135deg, #0a1429 0%, #0c1f33 50%, #112d47 100%) !important;
 
-  /* Spooky Halloween shadows with glow */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.3), 0 1px 4px rgba(138,43,226,.2) !important;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,.4), 0 2px 4px -1px rgba(138,43,226,.3) !important;
-  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.5), 0 4px 6px -2px rgba(255,107,0,.3) !important;
-  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.6), 0 10px 10px -5px rgba(138,43,226,.4) !important;
-  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,.8) !important;
-  --shadow-colored: 0 8px 32px -8px rgba(255,107,0,.6), 0 0 40px rgba(138,43,226,.4) !important;
+  /* Festive Christmas shadows with sparkle */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.2), 0 1px 4px rgba(196,30,58,.15) !important;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,.3), 0 2px 4px -1px rgba(22,91,51,.2) !important;
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.4), 0 4px 6px -2px rgba(196,30,58,.25) !important;
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.5), 0 10px 10px -5px rgba(22,91,51,.3) !important;
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,.7) !important;
+  --shadow-colored: 0 8px 32px -8px rgba(196,30,58,.5), 0 0 40px rgba(255,215,0,.3) !important;
+  --shadow-glow: 0 0 20px rgba(255,215,0,.4), 0 0 40px rgba(196,30,58,.2) !important;
 
   --text-heading: #ffffff !important;
-  --text-secondary: #b8a4c9 !important;
-  --ring: rgba(255, 107, 0, 0.5) !important;
+  --text-secondary: #c9d6df !important;
+  --ring: rgba(196, 30, 58, 0.5) !important;
 }
 
-/* Force dark background with mesh gradient on landing section */
+/* Force dark background with Christmas mesh gradient on landing section */
 .carpool-landing {
   background: var(--bg) !important;
   background-image: var(--gradient-mesh) !important;
@@ -66,7 +72,7 @@
   }
 }
 
-/* Orange cards on dark background */
+/* White/cream cards on dark background with festive borders */
 .carpool-landing .info-grid > .card,
 .carpool-landing .how-it-works .hiw-step-wrapper .hiw-step,
 .carpool-landing .cta-tile,
@@ -75,109 +81,117 @@
 .carpool-landing .video-frame,
 .carpool-landing .team-spotlight .ts-stage,
 .carpool-landing .cta-support {
-  background: #fa9e57 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
   color: #1f2937 !important;
+  box-shadow: var(--shadow-md), var(--shadow-glow) !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
 }
 
-/* Banner background override */
+/* Banner background override - Festive red */
 .carpool-landing .carpool-banner {
-  background: #ff8c00 !important;
-  color: #1f2937 !important;
+  background: linear-gradient(120deg, #c41e3a 0%, #dc143c 100%) !important;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-colored) !important;
 }
 
-/* Banner success/error states - high contrast on orange background */
+/* Banner success/error states */
 .carpool-landing .carpool-banner.success .banner-text,
 .carpool-landing .carpool-banner.success .banner-text strong {
-  color: #065f46 !important; /* Dark green for contrast on orange */
+  color: #ffffff !important;
 }
 
 .carpool-landing .carpool-banner.success .icon {
-  color: #065f46 !important;
-  background: rgba(6, 95, 70, 0.15) !important;
-  border-color: rgba(6, 95, 70, 0.3) !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .carpool-landing .carpool-banner.success {
-  background: linear-gradient(120deg, #90EE90 100%, #008000 100%) !important;
+  background: linear-gradient(120deg, #165b33 0%, #0f7f3f 100%) !important;
 }
 
-.carpool-landing .carpool-banner.error{
-  background: linear-gradient(120deg, #FFCCCB 100%, #FFCCCB 100%) !important;
+.carpool-landing .carpool-banner.error {
+  background: linear-gradient(120deg, #991b1b 0%, #dc2626 100%) !important;
 }
 
 .carpool-landing .carpool-banner.error .banner-text,
 .carpool-landing .carpool-banner.error .banner-text strong {
-  color: #7f1d1d !important; /* Dark red for contrast on orange */
+  color: #ffffff !important;
 }
 
 .carpool-landing .carpool-banner.error .icon {
-  color: #7f1d1d !important;
-  background: rgba(127, 29, 29, 0.15) !important;
-  border-color: rgba(127, 29, 29, 0.3) !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* FAQ details open state - orange background needs dark text */
+/* FAQ details open state - festive red background */
 .carpool-landing .faq details[open] {
-  background: #ff8c00 !important;
-  color: #1f2937 !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-colored) !important;
 }
 
 .carpool-landing .faq details[open] summary {
-  color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
 .carpool-landing .faq details[open] .answer {
-  color: #1f2937 !important;
+  color: #ffffff !important;
 }
 
-/* White text for headers on dark background */
+/* White text for headers on dark background with festive gradient */
 .carpool-landing h1,
 .carpool-landing .section h2,
 .carpool-landing .team-spotlight h2 {
   color: #ffffff !important;
-  background: var(--gradient-primary) !important;
+  background: linear-gradient(135deg, #ffd700 0%, #ffffff 50%, #c41e3a 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5) !important;
 }
 
-/* Hero heading - white text on dark background */
+/* Hero heading - festive Christmas gradient */
 .carpool-landing .hero h1 {
-  background: var(--gradient-primary) !important;
+  background: linear-gradient(135deg, #ffd700 0%, #ffffff 50%, #dc143c 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6)) !important;
 }
 
-/* CTA heading - dark text for orange card */
+/* CTA heading - Christmas red gradient */
 .carpool-landing .cta-head h2 {
-  background: #ff6b00 !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #ffd700 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
 }
 
-/* CTA heading - dark text for orange card */
+/* CTA subtitle - green gradient */
 .carpool-landing .cta-head .sub {
-  background: #ff8c00 !important;
+  background: linear-gradient(135deg, #165b33 0%, #ffd700 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
 }
 
-/* Card headings - dark text on orange background */
+/* Card headings - dark text on white background with festive touch */
 .carpool-landing .info-grid > .card h2,
 .carpool-landing .how-it-works .hiw-step h3,
 .carpool-landing .big,
 .carpool-landing .cta-tile strong {
-  color: #1f2937 !important;
+  color: #c41e3a !important;
   background: none !important;
   -webkit-background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
   background-clip: unset !important;
+  text-shadow: 0 2px 4px rgba(196,30,58,0.1) !important;
 }
 
-/* Card text - dark on orange background */
+/* Card text - dark on white background */
 .carpool-landing .info-grid > .card p,
 .carpool-landing .how-it-works .hiw-step p,
 .carpool-landing .cta-tile .meta,
@@ -186,226 +200,256 @@
 .carpool-landing .carpool-banner .banner-text,
 .carpool-landing .hours .note,
 .carpool-landing .cta-support .chip {
-  color: #1f2937 !important;
+  color: #374151 !important;
 }
 
 /* White text on dark background areas */
 .carpool-landing > .carpool-wrap > p,
 .carpool-landing .hero-subtitle {
-  color: #e0e0e0 !important;
+  color: #e5e7eb !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
 }
 
-/* Stat value - dark text on orange background */
+/* Stat value - Christmas red on white background */
 .carpool-landing .hero-highlight .stat-value {
-  color: #1f2937 !important;
+  color: #c41e3a !important;
   background: none !important;
   -webkit-background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
   background-clip: unset !important;
+  font-weight: 700 !important;
 }
 
-/* Badge with orange background and white text */
+/* Badge with festive red and green gradient */
 .carpool-landing .how-it-works .badge {
-  background: #ff6b00 !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #165b33 100%) !important;
   color: #ffffff !important;
-  border-color: var(--bg) !important;
-  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255,107,0,0.3) !important;
+  border-color: #ffd700 !important;
+  box-shadow: var(--shadow-colored) !important;
   -webkit-background-clip: unset !important;
   -webkit-text-fill-color: unset !important;
   background-clip: unset !important;
-  background-image: none !important;
+  background-image: linear-gradient(135deg, #c41e3a 0%, #165b33 100%) !important;
 }
 
-/* Button glow effects - ensure white text */
+/* Button with Christmas gradient and glow */
 .carpool-landing .btn {
-  background: var(--gradient-primary) !important;
-  box-shadow: var(--shadow-colored) !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 50%, #c41e3a 100%) !important;
+  box-shadow: var(--shadow-colored), 0 0 20px rgba(196,30,58,0.4) !important;
   color: #ffffff !important;
+  border: 2px solid #ffd700 !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
 }
 
 .carpool-landing .btn:hover {
-  box-shadow: var(--shadow-xl), 0 0 0 1px rgba(124,45,18,0.1) !important;
+  background: linear-gradient(135deg, #165b33 0%, #0f7f3f 50%, #165b33 100%) !important;
+  box-shadow: var(--shadow-xl), 0 0 30px rgba(22,91,51,0.6), 0 0 50px rgba(255,215,0,0.3) !important;
   color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  border-color: #ffd700 !important;
 }
 
-/* CTA icon backgrounds - on orange cards, needs better contrast */
+/* CTA icon backgrounds - festive colors */
 .carpool-landing .cta-icon {
-  background: rgba(0, 0, 0, 0.1) !important;
-  color: #1f2937 !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #ffd700 !important;
+  box-shadow: var(--shadow-colored) !important;
 }
 
-/* Team Spotlight - text on orange background */
+/* Team Spotlight */
 .carpool-landing .team-spotlight {
-  --ts-border: 1px solid rgba(17,24,39,.10) !important;
+  --ts-border: 2px solid rgba(196,30,58,.2) !important;
 }
 
 .carpool-landing .team-spotlight .ts-stage .ts-name {
   color: #1f2937 !important;
+  font-weight: 700 !important;
 }
 
 .carpool-landing .team-spotlight .ts-stage .ts-role {
-  color: #1f2937 !important;
+  color: #c41e3a !important;
 }
 
 .carpool-landing .team-spotlight .ts-stage .ts-fact {
-  color: #1f2937 !important;
+  color: #374151 !important;
 }
 
 .carpool-landing .team-spotlight .ts-btn {
-  background: var(--gradient-soft) !important; 
-color: #1f2937;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #ffd700 !important;
 }
 
 #carpool-landing #cta-title {
-color: #1f2937;
+  color: #1f2937 !important;
 }
 
 .carpool-landing .team-spotlight .ts-btn:hover {
-  background: var(--accent-bold) !important;
+  background: linear-gradient(135deg, #165b33 0%, #0f7f3f 100%) !important;
   color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(22,91,51,0.5) !important;
 }
 
-
-
-/* Eyebrow badge */
+/* Eyebrow badge - festive gold */
 .carpool-landing .cta-head .eyebrow {
-  border-color: rgba(124,45,18,.15) !important;
-  background: #ff6b00  !important;
-  color: #1a0a2e  !important;
-	border: none;
+  border: 2px solid #ffd700 !important;
+  background: linear-gradient(135deg, #ffd700 0%, #c5a572 100%) !important;
+  color: #1f2937 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 6px rgba(255,215,0,0.3) !important;
 }
 
-/* Support chips - better contrast on orange card */
+/* Support chips - festive styling */
 .carpool-landing .cta-support .chip {
-  background: rgba(0, 0, 0, 0.1) !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  color: #1f2937 !important;
+  background: #ffffff !important;
+  border: 2px solid #c41e3a !important;
+  color: #c41e3a !important;
+  transition: all 0.3s ease !important;
 }
 
 .carpool-landing .cta-support .chip:hover {
-  background: var(--gradient-primary) !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
   color: #ffffff !important;
-  border-color: transparent !important;
+  border-color: #ffd700 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-colored) !important;
 }
 
-/* Social icons - better contrast on orange card */
+/* Social icons - Christmas themed */
 .carpool-landing .cta-social .social {
-  background: rgba(0, 0, 0, 0.1) !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  color: #1f2937 !important;
+  background: #ffffff !important;
+  border: 2px solid #165b33 !important;
+  color: #165b33 !important;
+  transition: all 0.3s ease !important;
 }
 
 .carpool-landing .cta-social .social:hover {
-  background: var(--gradient-primary) !important;
+  background: linear-gradient(135deg, #165b33 0%, #0f7f3f 100%) !important;
   color: #ffffff !important;
-  border-color: transparent !important;
+  border-color: #ffd700 !important;
+  transform: translateY(-2px) scale(1.1) !important;
+  box-shadow: 0 0 20px rgba(22,91,51,0.5) !important;
 }
 
-/* How it works icon - on orange card, needs better contrast */
+/* How it works icon - festive red */
 .carpool-landing .how-it-works .hiw-icon {
-  background: rgba(0, 0, 0, 0.1) !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  color: #1f2937 !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
+  border: 2px solid #ffd700 !important;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-colored) !important;
 }
 
-/* Service banner icon - on orange card, needs better contrast */
+/* Service banner icon */
 .carpool-landing .carpool-banner .icon {
-  background: rgba(0, 0, 0, 0.1) !important;
-  color: #1f2937 !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Video frame border effect */
+/* Video frame border effect - Christmas colors */
 .carpool-landing .video-frame::before {
-  background: var(--gradient-primary) !important;
-  opacity: 0.6 !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #ffd700 50%, #165b33 100%) !important;
+  opacity: 0.7 !important;
 }
 
-/* FAQ details hover */
+/* FAQ details - festive styling */
 .carpool-landing .faq details {
-  background: var(--gradient-soft) !important;
-  border-color: rgba(124,45,18,.12) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 2px solid rgba(196,30,58,.2) !important;
+  transition: all 0.3s ease !important;
 }
 
 .carpool-landing .faq details:hover {
-  border-color: rgba(124,45,18,.2) !important;
+  border-color: rgba(196,30,58,.4) !important;
+  box-shadow: 0 0 20px rgba(196,30,58,0.2) !important;
 }
 
-/* Promise pop - darker background on orange card */
+/* Promise pop - festive gradient */
 .carpool-landing .hero-highlight .promise-pop {
-  background: linear-gradient(135deg, rgba(255,107,0,0.9) 0%, rgba(138,43,226,0.4) 100%) !important;
+  background: linear-gradient(135deg, rgba(196,30,58,0.2) 0%, rgba(22,91,51,0.2) 100%) !important;
+  border: 2px solid #ffd700 !important;
 }
 
 .carpool-landing .ts-facts {
-  background: var(--gradient-soft) !important;
+  background: linear-gradient(135deg, rgba(196,30,58,0.1) 0%, rgba(22,91,51,0.1) 100%) !important;
+  border: 2px solid #ffd700 !important;
 }
 
-.carpool-landing .ts-prev {
-  background: var(--gradient-soft) !important;
-}
+.carpool-landing .ts-prev,
 .carpool-landing .ts-next {
-  background: var(--gradient-soft) !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #dc143c 100%) !important;
+  color: #ffffff !important;
+  border: 2px solid #ffd700 !important;
+  transition: all 0.3s ease !important;
 }
 
+.carpool-landing .ts-prev:hover,
+.carpool-landing .ts-next:hover {
+  background: linear-gradient(135deg, #165b33 0%, #0f7f3f 100%) !important;
+  box-shadow: 0 0 20px rgba(22,91,51,0.5) !important;
+  transform: scale(1.1) !important;
+}
 
-
-/* Colored top borders on cards */
+/* Festive top borders on cards - Red, Green, Gold alternating */
 .carpool-landing .info-grid > .card::before,
 .carpool-landing .how-it-works .hiw-step::before,
 .carpool-landing .cta-tile::before,
 .carpool-landing .hero-highlight::before,
 .carpool-landing #hours .hours::before,
 .carpool-landing .carpool-banner::before {
-  background: #fc5603 !important;
+  background: linear-gradient(90deg, #c41e3a 0%, #ffd700 50%, #165b33 100%) !important;
+  height: 4px !important;
 }
 
-.carpool-landing .carpool-banner.success 
-{
-  border-top-color: #00b041 
+.carpool-landing .carpool-banner.success::before {
+  background: linear-gradient(90deg, #165b33 0%, #0f7f3f 100%) !important;
 }
 
-/* Section heading underlines */
+/* Section heading underlines - festive gradient */
 .carpool-landing .section h2::after {
-  background: var(--gradient-primary) !important;
+  background: linear-gradient(90deg, #c41e3a 0%, #ffd700 50%, #165b33 100%) !important;
+  height: 3px !important;
 }
 
-/* Card heading underline - darker on orange background */
+/* Card heading underline - Christmas red */
 .carpool-landing .info-grid .card h2::after {
-  background: #1f2937 !important;
+  background: linear-gradient(90deg, #c41e3a 0%, #ffd700 100%) !important;
+  height: 2px !important;
 }
 
-
-
-/* Twinkle animation for stars (added by JavaScript in Avada footer) */
-@keyframes twinkleStar {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
+/* Sparkle animation for festive elements */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(180deg); }
 }
 
-/* Shooting star animation */
-@keyframes shootingStar {
-  0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
-  70% { opacity: 1; }
-  100% { transform: translate(-300px, 300px) rotate(-45deg); opacity: 0; }
+/* Snowflake twinkle animation */
+@keyframes snowTwinkle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
 }
 
-/* Bat animation */
-@keyframes flyBat {
-  0% { transform: translateX(-100px) translateY(0); opacity: 0; }
+/* Falling snow animation */
+@keyframes snowfall {
+  0% { transform: translateY(-10px) translateX(0) rotate(0deg); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
-  100% { transform: translateX(calc(100vw + 100px)) translateY(-50px); opacity: 0; }
+  100% { transform: translateY(100vh) translateX(50px) rotate(360deg); opacity: 0; }
 }
 
-/* Ghost animation */
-@keyframes floatGhost {
-  0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.7; }
-  100% { transform: translateX(calc(100vw + 100px)) translateY(-30px) rotate(10deg); opacity: 0; }
+/* Christmas light twinkle */
+@keyframes christmasLights {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 5px currentColor; }
+  50% { opacity: 1; box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
 }
 
+/* Ornament swing animation */
+@keyframes ornamentSwing {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
 
 /* Ensure parent sections have proper stacking context */
 .carpool-landing {
@@ -428,12 +472,12 @@ color: #1f2937;
 
 /* Ensure html and body have dark background and no extra space */
 html {
-  background: #1a0a2e !important;
-  background-image: radial-gradient(at 20% 30%, rgba(255,107,0,0.4) 0, transparent 40%),
-                    radial-gradient(at 80% 20%, rgba(138,43,226,0.5) 0, transparent 45%),
-                    radial-gradient(at 40% 80%, rgba(255,140,0,0.35) 0, transparent 40%),
-                    radial-gradient(at 90% 70%, rgba(75,0,130,0.4) 0, transparent 45%),
-                    linear-gradient(135deg, #0f0520 0%, #1a0a2e 50%, #2d1550 100%) !important;
+  background: #0c1f33 !important;
+  background-image: radial-gradient(at 20% 30%, rgba(196,30,58,0.3) 0, transparent 40%),
+                    radial-gradient(at 80% 20%, rgba(22,91,51,0.35) 0, transparent 45%),
+                    radial-gradient(at 40% 80%, rgba(255,215,0,0.25) 0, transparent 40%),
+                    radial-gradient(at 90% 70%, rgba(220,20,60,0.3) 0, transparent 45%),
+                    linear-gradient(135deg, #0a1429 0%, #0c1f33 50%, #112d47 100%) !important;
   background-attachment: fixed !important;
   min-height: 100%;
 }
@@ -464,8 +508,9 @@ footer[itemscope] {
   padding-bottom: calc(48px + env(safe-area-inset-bottom)) !important;
 }
 
-/* Fix starfield to cover entire document, not just viewport */
-#stars-container {
+/* Fix snow container to cover entire document */
+#snow-container,
+#decorations-container {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -473,7 +518,7 @@ footer[itemscope] {
   height: 100% !important;
   min-height: 100vh !important;
   pointer-events: none !important;
-  z-index: 15 !important;
+  z-index: 9999 !important;
   overflow: hidden !important;
 }
 
@@ -485,19 +530,19 @@ footer[itemscope] {
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   /* Tighter footer on mobile */
   footer[itemscope] {
     padding: 32px 16px calc(32px + env(safe-area-inset-bottom)) !important;
     margin-top: 40px !important;
   }
-  
+
   /* Ensure carpool-wrap doesn't add extra space */
   .carpool-landing .carpool-wrap {
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
-  
+
   /* Ensure CTA section doesn't add extra margin */
   .carpool-landing .cta-section {
     margin-bottom: 0 !important;
@@ -541,24 +586,24 @@ footer[itemscope] {
     display: flex !important;
     flex-direction: column !important;
   }
-  
+
   /* Fixed spacing for icon on mobile */
   .how-it-works .hiw-icon {
     margin: 12px auto 4px !important;
     height: 28px !important;
     flex-shrink: 0 !important;
   }
-  
+
   /* Consistent title positioning */
   .how-it-works .hiw-title {
     margin: 4px 0 2px !important;
-    min-height: 2.4em !important; /* Reserve space for 2 lines */
+    min-height: 2.4em !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
   }
-  
+
   /* Text fills remaining space */
   .how-it-works .hiw-text {
     margin: 0 !important;
@@ -569,6 +614,6 @@ footer[itemscope] {
 /* Ultra-narrow screens */
 @media (max-width: 360px) {
   .how-it-works .hiw-title {
-    min-height: 2.6em !important; /* Slightly more space for wrapped text */
+    min-height: 2.6em !important;
   }
 }
