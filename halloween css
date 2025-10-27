@@ -79,41 +79,149 @@
   color: #1f2937 !important;
 }
 
-/* Banner background override */
+/* Banner background override - Modern Halloween Style */
 .carpool-landing .carpool-banner {
-  background: #ff8c00 !important;
+  background: linear-gradient(135deg, #ff8c00 0%, #ffa520 100%) !important;
   color: #1f2937 !important;
+  border-left-color: #ff6b00 !important;
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,.2),
+    0 4px 12px rgba(255,107,0,.3),
+    0 8px 24px rgba(138,43,226,.2) !important;
+}
+
+.carpool-landing .carpool-banner::before {
+  background: linear-gradient(180deg, #ff6b00 0%, #ff8c00 50%, transparent 100%) !important;
+}
+
+.carpool-landing .carpool-banner:hover {
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,.3),
+    0 6px 16px rgba(255,107,0,.4),
+    0 12px 32px rgba(138,43,226,.3) !important;
 }
 
 /* Banner success/error states - high contrast on orange background */
+.carpool-landing .carpool-banner.success {
+  background: linear-gradient(135deg, #90EE90 0%, #7de894 100%) !important;
+  border-left-color: #059669 !important;
+}
+
+.carpool-landing .carpool-banner.success::before {
+  background: linear-gradient(180deg, #059669 0%, #10b981 50%, transparent 100%) !important;
+}
+
 .carpool-landing .carpool-banner.success .banner-text,
 .carpool-landing .carpool-banner.success .banner-text strong {
-  color: #065f46 !important; /* Dark green for contrast on orange */
+  color: #065f46 !important; /* Dark green for contrast on light green */
 }
 
 .carpool-landing .carpool-banner.success .icon {
   color: #065f46 !important;
-  background: rgba(6, 95, 70, 0.15) !important;
-  border-color: rgba(6, 95, 70, 0.3) !important;
-}
-
-.carpool-landing .carpool-banner.success {
-  background: linear-gradient(120deg, #90EE90 100%, #008000 100%) !important;
+  background: linear-gradient(135deg, rgba(6, 95, 70, 0.15) 0%, rgba(6, 95, 70, 0.22) 100%) !important;
+  border-color: rgba(6, 95, 70, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(6, 95, 70, .2) !important;
 }
 
 .carpool-landing .carpool-banner.error{
-  background: linear-gradient(120deg, #FFCCCB 100%, #FFCCCB 100%) !important;
+  background: linear-gradient(135deg, #FFCCCB 0%, #ffb8b6 100%) !important;
+  border-left-color: #dc2626 !important;
+}
+
+.carpool-landing .carpool-banner.error::before {
+  background: linear-gradient(180deg, #dc2626 0%, #ef4444 50%, transparent 100%) !important;
 }
 
 .carpool-landing .carpool-banner.error .banner-text,
 .carpool-landing .carpool-banner.error .banner-text strong {
-  color: #7f1d1d !important; /* Dark red for contrast on orange */
+  color: #7f1d1d !important; /* Dark red for contrast on light red */
 }
 
 .carpool-landing .carpool-banner.error .icon {
   color: #7f1d1d !important;
-  background: rgba(127, 29, 29, 0.15) !important;
-  border-color: rgba(127, 29, 29, 0.3) !important;
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.15) 0%, rgba(127, 29, 29, 0.22) 100%) !important;
+  border-color: rgba(127, 29, 29, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(127, 29, 29, .2) !important;
+}
+
+/* Modal popup overrides for Halloween theme */
+.carpool-landing .ride-modal__card {
+  background: linear-gradient(180deg, #2d1b4e 0%, #3a2560 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,107,0,.2) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,.15),
+    0 8px 16px -4px rgba(0,0,0,.5),
+    0 20px 40px -8px rgba(138,43,226,.4),
+    0 40px 80px -16px rgba(255,107,0,.3) !important;
+}
+
+.carpool-landing .ride-modal__head {
+  background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%) !important;
+  color: #1f2937 !important;
+}
+
+.carpool-landing .ride-modal__head::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent) !important;
+}
+
+.carpool-landing .ride-modal__title {
+  color: #1f2937 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,.2) !important;
+}
+
+.carpool-landing .ride-modal__subtitle {
+  color: rgba(31,41,55,.85) !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,.15) !important;
+}
+
+.carpool-landing .ride-modal__close {
+  color: rgba(31,41,55,.75) !important;
+}
+
+.carpool-landing .ride-modal__close:hover {
+  background: rgba(0,0,0,.1) !important;
+  color: #1f2937 !important;
+}
+
+.carpool-landing .ride-modal__body {
+  color: #e5e7eb !important;
+}
+
+.carpool-landing .ride-btn--call {
+  background: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,.2),
+    0 4px 12px rgba(255,107,0,.4),
+    0 8px 24px rgba(255,107,0,.3) !important;
+}
+
+.carpool-landing .ride-btn--call:hover {
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,.3),
+    0 6px 16px rgba(255,107,0,.5),
+    0 12px 32px rgba(255,107,0,.4) !important;
+}
+
+.carpool-landing .ride-btn--call::before {
+  background: linear-gradient(135deg, rgba(255,255,255,.2) 0%, transparent 100%) !important;
+}
+
+.carpool-landing .ride-btn--secondary {
+  background: #3a2560 !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255,107,0,.25) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3) !important;
+}
+
+.carpool-landing .ride-btn--secondary:hover {
+  background: #4a3070 !important;
+  border-color: rgba(255,107,0,.35) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4) !important;
+}
+
+.carpool-landing .ride-btn--secondary:active {
+  background: #2d1b4e !important;
 }
 
 /* FAQ details open state - orange background needs dark text */
