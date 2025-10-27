@@ -72,7 +72,7 @@
   }
 }
 
-/* White/cream cards on dark background with festive borders */
+/* Festive Christmas cards with alternating red and green accents */
 .carpool-landing .info-grid > .card,
 .carpool-landing .how-it-works .hiw-step-wrapper .hiw-step,
 .carpool-landing .cta-tile,
@@ -81,11 +81,27 @@
 .carpool-landing .video-frame,
 .carpool-landing .team-spotlight .ts-stage,
 .carpool-landing .cta-support {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+  background: linear-gradient(135deg, #fef5e7 0%, #fdebd0 100%) !important;
   color: #1f2937 !important;
   box-shadow: var(--shadow-md), var(--shadow-glow) !important;
-  border: 2px solid transparent !important;
-  background-clip: padding-box !important;
+  border: 3px solid #ffd700 !important;
+  position: relative !important;
+}
+
+/* Add festive corner accents to cards */
+.carpool-landing .info-grid > .card::after,
+.carpool-landing .how-it-works .hiw-step-wrapper .hiw-step::after,
+.carpool-landing .cta-tile::after,
+.carpool-landing .hero-highlight::after {
+  content: '' !important;
+  position: absolute !important;
+  top: -3px !important;
+  right: -3px !important;
+  width: 30px !important;
+  height: 30px !important;
+  background: linear-gradient(135deg, #c41e3a 0%, #165b33 100%) !important;
+  clip-path: polygon(100% 0, 0 0, 100% 100%) !important;
+  border-radius: 0 8px 0 0 !important;
 }
 
 /* Banner background override - Festive red */

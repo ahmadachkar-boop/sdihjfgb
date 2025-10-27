@@ -12,7 +12,7 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
     }
   }
 
-  // Create Twinkling Christmas Stars Background
+  // Create Christmas-Themed Stars Background with Red & Green Tints
   function createChristmasStars(){
     var section = document.querySelector('.carpool-landing');
     if (!section) {
@@ -20,32 +20,35 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       return;
     }
 
-    console.log('[CARPOOL] Creating Christmas starfield with 120 twinkling stars');
+    console.log('[CARPOOL] Creating Christmas starfield with festive colors');
 
     var starsContainer = document.createElement('div');
     starsContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:15;overflow:hidden;';
     starsContainer.id = 'stars-container';
 
-    // Generate 120 random twinkling stars in Christmas colors
-    for (var i = 0; i < 120; i++) {
+    // Generate 80 stars with Christmas colors
+    for (var i = 0; i < 80; i++) {
       var star = document.createElement('div');
-      var size = Math.random() < 0.6 ? '2px' : (Math.random() < 0.8 ? '3px' : '4px');
+      var size = Math.random() < 0.7 ? '2px' : (Math.random() < 0.9 ? '3px' : '4px');
       var x = Math.random() * 100;
       var y = Math.random() * 100;
-      var opacity = 0.4 + Math.random() * 0.6;
+      var opacity = 0.3 + Math.random() * 0.7;
       var delay = Math.random() * 4;
 
-      // Mix of white, gold, and subtle red/green tints
+      // Christmas color palette for stars: gold, white, red, green
       var colors = [
-        'rgba(255,255,255,0.9)',
-        'rgba(255,215,0,0.8)',
-        'rgba(255,255,240,0.9)',
-        'rgba(255,223,0,0.7)',
-        'rgba(255,250,250,1)'
+        'rgba(255,215,0,0.9)',     // Gold
+        'rgba(255,255,255,0.9)',   // White
+        'rgba(255,255,240,0.95)',  // Warm white
+        'rgba(255,223,0,0.8)',     // Light gold
+        'rgba(196,30,58,0.7)',     // Christmas red
+        'rgba(22,91,51,0.7)',      // Christmas green
+        'rgba(220,20,60,0.75)',    // Crimson
+        'rgba(39,174,96,0.7)'      // Forest green
       ];
       var color = colors[Math.floor(Math.random() * colors.length)];
 
-      star.style.cssText = 'position:absolute;width:' + size + ';height:' + size + ';background:' + color + ';border-radius:50%;box-shadow:0 0 4px ' + color + ';left:' + x + '%;top:' + y + '%;opacity:' + opacity + ';animation:twinkleStar ' + (2 + Math.random() * 2) + 's ease-in-out infinite ' + delay + 's;';
+      star.style.cssText = 'position:absolute;width:' + size + ';height:' + size + ';background:' + color + ';border-radius:50%;box-shadow:0 0 6px ' + color + ', 0 0 12px ' + color + ';left:' + x + '%;top:' + y + '%;opacity:' + opacity + ';animation:twinkleStar ' + (2 + Math.random() * 3) + 's ease-in-out infinite ' + delay + 's;';
       starsContainer.appendChild(star);
     }
 
@@ -54,18 +57,18 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       section.insertBefore(starsContainer, section.firstChild);
     }
 
-    // Add star twinkle animation
+    // Add star twinkle animation with more sparkle
     if (!document.getElementById('star-animations')) {
       var style = document.createElement('style');
       style.id = 'star-animations';
-      style.textContent = '@keyframes twinkleStar { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.3); } }';
+      style.textContent = '@keyframes twinkleStar { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 20px currentColor; } }';
       document.head.appendChild(style);
     }
 
-    console.log('[CARPOOL] Christmas starfield created - 120 stars added');
+    console.log('[CARPOOL] Christmas starfield created with festive colors');
   }
 
-  // Create Falling Snowflakes
+  // Create Falling Snowflakes (Reduced amount)
   function createSnowfall() {
     var section = document.querySelector('.carpool-landing');
     if (!section) {
@@ -82,20 +85,18 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
 
     function createSnowflake() {
       var snowflake = document.createElement('div');
-      var size = Math.random() * 8 + 4; // 4-12px
+      var size = Math.random() * 8 + 4;
       var startX = Math.random() * 100;
-      var duration = Math.random() * 15 + 10; // 10-25 seconds
+      var duration = Math.random() * 15 + 10;
       var delay = Math.random() * 5;
-      var drift = (Math.random() - 0.5) * 100; // Horizontal drift
+      var drift = (Math.random() - 0.5) * 100;
       var opacity = Math.random() * 0.6 + 0.4;
 
-      // Use ❄ snowflake emoji or • for variety
       var snowTypes = ['❄', '❅', '❆', '•', '·'];
       snowflake.innerHTML = snowTypes[Math.floor(Math.random() * snowTypes.length)];
 
       snowflake.style.cssText = 'position:absolute;left:' + startX + '%;top:-20px;font-size:' + size + 'px;color:rgba(255,255,255,' + opacity + ');animation:snowfall ' + duration + 's linear infinite ' + delay + 's;pointer-events:none;text-shadow:0 0 5px rgba(255,255,255,0.8);';
 
-      // Add unique drift animation
       var driftStyle = document.createElement('style');
       var animId = 'drift-' + Math.random().toString(36).substr(2, 9);
       driftStyle.textContent = '@keyframes ' + animId + ' { 0% { transform: translateY(-20px) translateX(0) rotate(0deg); opacity:0; } 10% { opacity:1; } 90% { opacity:1; } 100% { transform: translateY(100vh) translateX(' + drift + 'px) rotate(360deg); opacity:0; } }';
@@ -105,15 +106,71 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       snowContainer.appendChild(snowflake);
     }
 
-    // Create initial snowflakes
-    for (var i = 0; i < 50; i++) {
+    // Create 30 snowflakes (reduced from 50)
+    for (var i = 0; i < 30; i++) {
       createSnowflake();
     }
 
-    console.log('[CARPOOL] Snowfall initialized with 50 snowflakes');
+    console.log('[CARPOOL] Snowfall initialized with 30 snowflakes');
   }
 
-  // Christmas Decorations - Floating elements
+  // Santa Sleigh Animation - Runs once at page load
+  function createSantaSleigh() {
+    var section = document.querySelector('.carpool-landing');
+    if (!section) {
+      console.warn('[CARPOOL] .carpool-landing not found - Santa sleigh skipped');
+      return;
+    }
+
+    console.log('[CARPOOL] Creating Santa sleigh flyover');
+
+    var sleighContainer = document.createElement('div');
+    sleighContainer.style.cssText = 'position:fixed;top:15%;left:-300px;z-index:10000;pointer-events:none;font-size:48px;animation:santaFly 8s ease-in-out;filter:drop-shadow(0 0 20px rgba(255,215,0,0.8));';
+    sleighContainer.innerHTML = '🦌🦌🦌🛷🎅';
+
+    section.appendChild(sleighContainer);
+
+    // Add animation
+    var style = document.createElement('style');
+    style.textContent = `
+      @keyframes santaFly {
+        0% {
+          left: -300px;
+          top: 15%;
+          transform: rotate(-5deg) scale(1);
+        }
+        20% {
+          top: 10%;
+          transform: rotate(0deg) scale(1.1);
+        }
+        50% {
+          left: 50%;
+          top: 12%;
+          transform: rotate(2deg) scale(1.2);
+        }
+        80% {
+          top: 8%;
+          transform: rotate(-2deg) scale(1.1);
+        }
+        100% {
+          left: calc(100% + 300px);
+          top: 5%;
+          transform: rotate(-5deg) scale(1);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Remove after animation completes
+    setTimeout(function() {
+      sleighContainer.remove();
+      style.remove();
+    }, 8000);
+
+    console.log('[CARPOOL] Santa sleigh animation started');
+  }
+
+  // Reduced Christmas Decorations - Much fewer emojis
   function initChristmasDecorations(){
     var section = document.querySelector('.carpool-landing');
     if (!section) {
@@ -121,14 +178,14 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       return;
     }
 
-    console.log('[CARPOOL] Initializing Christmas decorations');
+    console.log('[CARPOOL] Initializing Christmas decorations (reduced)');
 
     var decorContainer = document.createElement('div');
     decorContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;overflow:hidden;';
     decorContainer.id = 'decorations-container';
     section.appendChild(decorContainer);
 
-    // Sparkles that appear randomly
+    // Sparkles - occasional only
     function createSparkle() {
       var sparkle = document.createElement('div');
       var x = Math.random() * 100;
@@ -145,12 +202,12 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       }, 2000);
     }
 
-    // Floating Christmas Tree
+    // Christmas Tree
     function createChristmasTree() {
       var tree = document.createElement('div');
       var startY = Math.random() * 40 + 10;
-      var duration = 25 + Math.random() * 15;
-      var size = 30 + Math.random() * 25;
+      var duration = 25 + Math.random() * 10;
+      var size = 30 + Math.random() * 20;
 
       tree.innerHTML = '🎄';
       tree.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 8px rgba(22,91,51,0.6));';
@@ -159,28 +216,14 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       setTimeout(function(){ tree.remove(); }, duration * 1000);
     }
 
-    // Floating Santa
-    function createSanta() {
-      var santa = document.createElement('div');
-      var startY = Math.random() * 30 + 5;
-      var duration = 20 + Math.random() * 10;
-      var size = 35 + Math.random() * 20;
-
-      santa.innerHTML = '🎅';
-      santa.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's linear;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 10px rgba(196,30,58,0.7));';
-
-      decorContainer.appendChild(santa);
-      setTimeout(function(){ santa.remove(); }, duration * 1000);
-    }
-
-    // Floating Gift/Present
+    // Gift
     function createGift() {
       var gift = document.createElement('div');
       var startY = Math.random() * 50 + 15;
-      var duration = 22 + Math.random() * 12;
-      var size = 25 + Math.random() * 20;
+      var duration = 22 + Math.random() * 10;
+      var size = 25 + Math.random() * 15;
 
-      var giftTypes = ['🎁', '🎀', '🎉'];
+      var giftTypes = ['🎁', '🎀'];
       gift.innerHTML = giftTypes[Math.floor(Math.random() * giftTypes.length)];
       gift.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));';
 
@@ -188,83 +231,27 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       setTimeout(function(){ gift.remove(); }, duration * 1000);
     }
 
-    // Floating Ornament
+    // Ornament
     function createOrnament() {
       var ornament = document.createElement('div');
       var startY = Math.random() * 40 + 20;
-      var duration = 28 + Math.random() * 12;
-      var size = 20 + Math.random() * 15;
+      var duration = 28 + Math.random() * 10;
+      var size = 20 + Math.random() * 12;
 
-      var ornamentTypes = ['🔴', '🟢', '🟡', '🔵'];
+      var ornamentTypes = ['🔴', '🟢', '🟡'];
       ornament.innerHTML = ornamentTypes[Math.floor(Math.random() * ornamentTypes.length)];
-      ornament.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's linear;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 6px rgba(255,215,0,0.5));animation:floatOrnament ' + duration + 's ease-in-out;';
+      ornament.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatOrnament ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 6px rgba(255,215,0,0.5));';
 
       decorContainer.appendChild(ornament);
       setTimeout(function(){ ornament.remove(); }, duration * 1000);
     }
 
-    // Floating Snowman
-    function createSnowman() {
-      var snowman = document.createElement('div');
-      var startY = Math.random() * 45 + 10;
-      var duration = 30 + Math.random() * 15;
-      var size = 30 + Math.random() * 20;
-
-      snowman.innerHTML = '⛄';
-      snowman.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 8px rgba(255,255,255,0.8));';
-
-      decorContainer.appendChild(snowman);
-      setTimeout(function(){ snowman.remove(); }, duration * 1000);
-    }
-
-    // Floating Reindeer
-    function createReindeer() {
-      var reindeer = document.createElement('div');
-      var startY = Math.random() * 25 + 5;
-      var duration = 18 + Math.random() * 10;
-      var size = 30 + Math.random() * 15;
-
-      reindeer.innerHTML = '🦌';
-      reindeer.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's linear;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 8px rgba(196,30,58,0.5));';
-
-      decorContainer.appendChild(reindeer);
-      setTimeout(function(){ reindeer.remove(); }, duration * 1000);
-    }
-
-    // Floating Candy Cane
-    function createCandyCane() {
-      var candy = document.createElement('div');
-      var startY = Math.random() * 50 + 15;
-      var duration = 24 + Math.random() * 12;
-      var size = 25 + Math.random() * 15;
-
-      candy.innerHTML = '🍬';
-      candy.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 6px rgba(196,30,58,0.6));';
-
-      decorContainer.appendChild(candy);
-      setTimeout(function(){ candy.remove(); }, duration * 1000);
-    }
-
-    // Floating Bell
-    function createBell() {
-      var bell = document.createElement('div');
-      var startY = Math.random() * 40 + 15;
-      var duration = 26 + Math.random() * 10;
-      var size = 22 + Math.random() * 18;
-
-      bell.innerHTML = '🔔';
-      bell.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's linear;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 8px rgba(255,215,0,0.7));';
-
-      decorContainer.appendChild(bell);
-      setTimeout(function(){ bell.remove(); }, duration * 1000);
-    }
-
-    // Floating Star
+    // Star
     function createStar() {
       var star = document.createElement('div');
       var startY = Math.random() * 35 + 10;
-      var duration = 22 + Math.random() * 12;
-      var size = 25 + Math.random() * 20;
+      var duration = 22 + Math.random() * 10;
+      var size = 25 + Math.random() * 15;
 
       star.innerHTML = '⭐';
       star.style.cssText = 'position:absolute;font-size:' + size + 'px;top:' + startY + '%;left:-60px;animation:floatChristmas ' + duration + 's ease-in-out;pointer-events:none;z-index:9998;filter:drop-shadow(0 0 10px rgba(255,215,0,0.8));';
@@ -273,7 +260,7 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
       setTimeout(function(){ star.remove(); }, duration * 1000);
     }
 
-    // Add CSS animations for floating decorations
+    // Add CSS animations
     var style = document.createElement('style');
     style.textContent = `
       @keyframes floatChristmas {
@@ -304,31 +291,21 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
     `;
     document.head.appendChild(style);
 
-    // Set intervals for creating decorations
-    setInterval(createSparkle, 3000);
-    setInterval(createChristmasTree, 12000);
-    setInterval(createSanta, 15000);
-    setInterval(createGift, 10000);
-    setInterval(createOrnament, 8000);
-    setInterval(createSnowman, 18000);
-    setInterval(createReindeer, 13000);
-    setInterval(createCandyCane, 11000);
-    setInterval(createBell, 14000);
-    setInterval(createStar, 9000);
+    // Reduced intervals - much less frequent
+    setInterval(createSparkle, 8000);        // Every 8 seconds (was 3)
+    setInterval(createChristmasTree, 25000); // Every 25 seconds (was 12)
+    setInterval(createGift, 20000);          // Every 20 seconds (was 10)
+    setInterval(createOrnament, 18000);      // Every 18 seconds (was 8)
+    setInterval(createStar, 22000);          // Every 22 seconds (was 9)
 
     // Initial decorations with staggered delays
-    setTimeout(createSparkle, 500);
-    setTimeout(createChristmasTree, 2000);
-    setTimeout(createSanta, 4000);
-    setTimeout(createGift, 1500);
-    setTimeout(createOrnament, 3000);
-    setTimeout(createSnowman, 5000);
-    setTimeout(createReindeer, 2500);
-    setTimeout(createCandyCane, 3500);
-    setTimeout(createBell, 4500);
-    setTimeout(createStar, 1000);
+    setTimeout(createSparkle, 2000);
+    setTimeout(createChristmasTree, 5000);
+    setTimeout(createGift, 8000);
+    setTimeout(createOrnament, 11000);
+    setTimeout(createStar, 14000);
 
-    console.log('[CARPOOL] Christmas decorations initialized');
+    console.log('[CARPOOL] Christmas decorations initialized (reduced frequency)');
   }
 
   // Run when DOM is ready
@@ -336,6 +313,7 @@ console.log('[CARPOOL] ========== CHRISTMAS SCRIPT LOADED FROM AVADA FOOTER ====
     console.log('[CARPOOL] DOM ready - creating Christmas effects');
     createChristmasStars();
     createSnowfall();
+    createSantaSleigh();  // Runs once at load
     initChristmasDecorations();
   });
 
