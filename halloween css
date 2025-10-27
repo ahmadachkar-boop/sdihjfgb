@@ -1,0 +1,574 @@
+/* ========================================
+   HALLOWEEN THEME OVERRIDE FOR CARPOOL HOMEPAGE
+
+   Usage: Paste this entire file into Avada → Theme Options → Custom CSS
+
+   To activate Halloween theme: Add this CSS
+   To deactivate: Remove this CSS from Custom CSS field
+
+   Without this CSS, the page will display the professional
+   neutral theme with light gray backgrounds and maroon accents.
+   ======================================== */
+
+/* Halloween Color Variables Override */
+:root {
+  /* Halloween color palette */
+  --accent: #ff6b00 !important; /* Bright Halloween orange */
+  --accent-light: #ff8c00 !important;
+  --accent-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8c00 100%) !important;
+  --bg: #1a0a2e !important; /* Deep dark purple */
+  --text: #ffffff !important;
+  --muted: #b8a4c9 !important;
+  --muted-accessible: #9d88b3 !important;
+  --card: #2d1b4e !important;
+
+  /* BOLD Halloween gradients */
+  --gradient-primary: linear-gradient(135deg, #ff6b00 0%, #ff8c00 50%, #ffa500 100%) !important;
+  --gradient-soft: linear-gradient(135deg, rgba(255,107,0,0.9) 0%, rgba(138,43,226,0.4) 100%) !important;
+  --gradient-mesh: radial-gradient(at 20% 30%, rgba(255,107,0,0.4) 0, transparent 40%),
+                   radial-gradient(at 80% 20%, rgba(138,43,226,0.5) 0, transparent 45%),
+                   radial-gradient(at 40% 80%, rgba(255,140,0,0.35) 0, transparent 40%),
+                   radial-gradient(at 90% 70%, rgba(75,0,130,0.4) 0, transparent 45%),
+                   linear-gradient(135deg, #0f0520 0%, #1a0a2e 50%, #2d1550 100%) !important;
+
+  /* Spooky Halloween shadows with glow */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3), 0 1px 4px rgba(138,43,226,.2) !important;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,.4), 0 2px 4px -1px rgba(138,43,226,.3) !important;
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,.5), 0 4px 6px -2px rgba(255,107,0,.3) !important;
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,.6), 0 10px 10px -5px rgba(138,43,226,.4) !important;
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,.8) !important;
+  --shadow-colored: 0 8px 32px -8px rgba(255,107,0,.6), 0 0 40px rgba(138,43,226,.4) !important;
+
+  --text-heading: #ffffff !important;
+  --text-secondary: #b8a4c9 !important;
+  --ring: rgba(255, 107, 0, 0.5) !important;
+}
+
+/* Force dark background with mesh gradient on landing section */
+.carpool-landing {
+  background: var(--bg) !important;
+  background-image: var(--gradient-mesh) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  color: var(--text) !important;
+}
+
+/* Force dark background on html/body when landing page is present */
+@supports selector(:has(*)) {
+  html:has(.carpool-landing),
+  body:has(.carpool-landing) {
+    background: var(--bg) !important;
+    background-image: var(--gradient-mesh) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+  }
+}
+
+/* Orange cards on dark background */
+.carpool-landing .info-grid > .card,
+.carpool-landing .how-it-works .hiw-step-wrapper .hiw-step,
+.carpool-landing .cta-tile,
+.carpool-landing .hero-highlight,
+.carpool-landing #hours .hours,
+.carpool-landing .video-frame,
+.carpool-landing .team-spotlight .ts-stage,
+.carpool-landing .cta-support {
+  background: #fa9e57 !important;
+  color: #1f2937 !important;
+}
+
+/* Banner background override */
+.carpool-landing .carpool-banner {
+  background: #ff8c00 !important;
+  color: #1f2937 !important;
+}
+
+/* Banner success/error states - high contrast on orange background */
+.carpool-landing .carpool-banner.success .banner-text,
+.carpool-landing .carpool-banner.success .banner-text strong {
+  color: #065f46 !important; /* Dark green for contrast on orange */
+}
+
+.carpool-landing .carpool-banner.success .icon {
+  color: #065f46 !important;
+  background: rgba(6, 95, 70, 0.15) !important;
+  border-color: rgba(6, 95, 70, 0.3) !important;
+}
+
+.carpool-landing .carpool-banner.success {
+  background: linear-gradient(120deg, #90EE90 100%, #008000 100%) !important;
+}
+
+.carpool-landing .carpool-banner.error{
+  background: linear-gradient(120deg, #FFCCCB 100%, #FFCCCB 100%) !important;
+}
+
+.carpool-landing .carpool-banner.error .banner-text,
+.carpool-landing .carpool-banner.error .banner-text strong {
+  color: #7f1d1d !important; /* Dark red for contrast on orange */
+}
+
+.carpool-landing .carpool-banner.error .icon {
+  color: #7f1d1d !important;
+  background: rgba(127, 29, 29, 0.15) !important;
+  border-color: rgba(127, 29, 29, 0.3) !important;
+}
+
+/* FAQ details open state - orange background needs dark text */
+.carpool-landing .faq details[open] {
+  background: #ff8c00 !important;
+  color: #1f2937 !important;
+}
+
+.carpool-landing .faq details[open] summary {
+  color: #1f2937 !important;
+}
+
+.carpool-landing .faq details[open] .answer {
+  color: #1f2937 !important;
+}
+
+/* White text for headers on dark background */
+.carpool-landing h1,
+.carpool-landing .section h2,
+.carpool-landing .team-spotlight h2 {
+  color: #ffffff !important;
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Hero heading - white text on dark background */
+.carpool-landing .hero h1 {
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* CTA heading - dark text for orange card */
+.carpool-landing .cta-head h2 {
+  background: #ff6b00 !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* CTA heading - dark text for orange card */
+.carpool-landing .cta-head .sub {
+  background: #ff8c00 !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Card headings - dark text on orange background */
+.carpool-landing .info-grid > .card h2,
+.carpool-landing .how-it-works .hiw-step h3,
+.carpool-landing .big,
+.carpool-landing .cta-tile strong {
+  color: #1f2937 !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+
+/* Card text - dark on orange background */
+.carpool-landing .info-grid > .card p,
+.carpool-landing .how-it-works .hiw-step p,
+.carpool-landing .cta-tile .meta,
+.carpool-landing .hero-highlight .stat-label,
+.carpool-landing .hero-highlight .hero-promise,
+.carpool-landing .carpool-banner .banner-text,
+.carpool-landing .hours .note,
+.carpool-landing .cta-support .chip {
+  color: #1f2937 !important;
+}
+
+/* White text on dark background areas */
+.carpool-landing > .carpool-wrap > p,
+.carpool-landing .hero-subtitle {
+  color: #e0e0e0 !important;
+}
+
+/* Stat value - dark text on orange background */
+.carpool-landing .hero-highlight .stat-value {
+  color: #1f2937 !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+
+/* Badge with orange background and white text */
+.carpool-landing .how-it-works .badge {
+  background: #ff6b00 !important;
+  color: #ffffff !important;
+  border-color: var(--bg) !important;
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255,107,0,0.3) !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  background-image: none !important;
+}
+
+/* Button glow effects - ensure white text */
+.carpool-landing .btn {
+  background: var(--gradient-primary) !important;
+  box-shadow: var(--shadow-colored) !important;
+  color: #ffffff !important;
+}
+
+.carpool-landing .btn:hover {
+  box-shadow: var(--shadow-xl), 0 0 0 1px rgba(124,45,18,0.1) !important;
+  color: #ffffff !important;
+}
+
+/* CTA icon backgrounds - on orange cards, needs better contrast */
+.carpool-landing .cta-icon {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #1f2937 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Team Spotlight - text on orange background */
+.carpool-landing .team-spotlight {
+  --ts-border: 1px solid rgba(17,24,39,.10) !important;
+}
+
+.carpool-landing .team-spotlight .ts-stage .ts-name {
+  color: #1f2937 !important;
+}
+
+.carpool-landing .team-spotlight .ts-stage .ts-role {
+  color: #1f2937 !important;
+}
+
+.carpool-landing .team-spotlight .ts-stage .ts-fact {
+  color: #1f2937 !important;
+}
+
+.carpool-landing .team-spotlight .ts-btn {
+  background: var(--gradient-soft) !important; 
+color: #1f2937;
+}
+
+#carpool-landing #cta-title {
+color: #1f2937;
+}
+
+.carpool-landing .team-spotlight .ts-btn:hover {
+  background: var(--accent-bold) !important;
+  color: #ffffff !important;
+}
+
+
+
+/* Eyebrow badge */
+.carpool-landing .cta-head .eyebrow {
+  border-color: rgba(124,45,18,.15) !important;
+  background: #ff6b00  !important;
+  color: #1a0a2e  !important;
+	border: none;
+}
+
+/* Support chips - better contrast on orange card */
+.carpool-landing .cta-support .chip {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #1f2937 !important;
+}
+
+.carpool-landing .cta-support .chip:hover {
+  background: var(--gradient-primary) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+/* Social icons - better contrast on orange card */
+.carpool-landing .cta-social .social {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #1f2937 !important;
+}
+
+.carpool-landing .cta-social .social:hover {
+  background: var(--gradient-primary) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+}
+
+/* How it works icon - on orange card, needs better contrast */
+.carpool-landing .how-it-works .hiw-icon {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #1f2937 !important;
+}
+
+/* Service banner icon - on orange card, needs better contrast */
+.carpool-landing .carpool-banner .icon {
+  background: rgba(0, 0, 0, 0.1) !important;
+  color: #1f2937 !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Video frame border effect */
+.carpool-landing .video-frame::before {
+  background: var(--gradient-primary) !important;
+  opacity: 0.6 !important;
+}
+
+/* FAQ details hover */
+.carpool-landing .faq details {
+  background: var(--gradient-soft) !important;
+  border-color: rgba(124,45,18,.12) !important;
+}
+
+.carpool-landing .faq details:hover {
+  border-color: rgba(124,45,18,.2) !important;
+}
+
+/* Promise pop - darker background on orange card */
+.carpool-landing .hero-highlight .promise-pop {
+  background: linear-gradient(135deg, rgba(255,107,0,0.9) 0%, rgba(138,43,226,0.4) 100%) !important;
+}
+
+.carpool-landing .ts-facts {
+  background: var(--gradient-soft) !important;
+}
+
+.carpool-landing .ts-prev {
+  background: var(--gradient-soft) !important;
+}
+.carpool-landing .ts-next {
+  background: var(--gradient-soft) !important;
+}
+
+
+
+/* Colored top borders on cards */
+.carpool-landing .info-grid > .card::before,
+.carpool-landing .how-it-works .hiw-step::before,
+.carpool-landing .cta-tile::before,
+.carpool-landing .hero-highlight::before,
+.carpool-landing #hours .hours::before,
+.carpool-landing .carpool-banner::before {
+  background: #fc5603 !important;
+}
+
+.carpool-landing .carpool-banner.success 
+{
+  border-top-color: #00b041 
+}
+
+/* Section heading underlines */
+.carpool-landing .section h2::after {
+  background: var(--gradient-primary) !important;
+}
+
+/* Card heading underline - darker on orange background */
+.carpool-landing .info-grid .card h2::after {
+  background: #1f2937 !important;
+}
+
+
+
+/* Twinkle animation for stars (added by JavaScript in Avada footer) */
+@keyframes twinkleStar {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Shooting star animation */
+@keyframes shootingStar {
+  0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translate(-300px, 300px) rotate(-45deg); opacity: 0; }
+}
+
+/* Bat animation */
+@keyframes flyBat {
+  0% { transform: translateX(-100px) translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 100px)) translateY(-50px); opacity: 0; }
+}
+
+/* Ghost animation */
+@keyframes floatGhost {
+  0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateX(calc(100vw + 100px)) translateY(-30px) rotate(10deg); opacity: 0; }
+}
+
+
+/* Ensure parent sections have proper stacking context */
+.carpool-landing {
+  position: relative !important;
+  z-index: auto !important;
+}
+
+.carpool-landing .info-grid,
+.carpool-landing .how-it-works,
+.carpool-landing .cta-section,
+.carpool-landing .faq,
+.carpool-landing #hours {
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* ========================================
+   FIX: Mobile Footer Spacing Issue
+   ======================================== */
+
+/* Ensure html and body have dark background and no extra space */
+html {
+  background: #1a0a2e !important;
+  background-image: radial-gradient(at 20% 30%, rgba(255,107,0,0.4) 0, transparent 40%),
+                    radial-gradient(at 80% 20%, rgba(138,43,226,0.5) 0, transparent 45%),
+                    radial-gradient(at 40% 80%, rgba(255,140,0,0.35) 0, transparent 40%),
+                    radial-gradient(at 90% 70%, rgba(75,0,130,0.4) 0, transparent 45%),
+                    linear-gradient(135deg, #0f0520 0%, #1a0a2e 50%, #2d1550 100%) !important;
+  background-attachment: fixed !important;
+  min-height: 100%;
+}
+
+body {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+}
+
+/* Ensure carpool-landing extends to cover full page */
+.carpool-landing {
+  min-height: 100vh !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Make footer part of the dark background flow */
+.carpool-landing > .carpool-wrap {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Ensure footer has no gaps */
+footer[itemscope] {
+  margin-bottom: 0 !important;
+  padding-bottom: calc(48px + env(safe-area-inset-bottom)) !important;
+}
+
+/* Fix starfield to cover entire document, not just viewport */
+#stars-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 15 !important;
+  overflow: hidden !important;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 700px) {
+  /* Ensure no white space on mobile */
+  html, body {
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Tighter footer on mobile */
+  footer[itemscope] {
+    padding: 32px 16px calc(32px + env(safe-area-inset-bottom)) !important;
+    margin-top: 40px !important;
+  }
+  
+  /* Ensure carpool-wrap doesn't add extra space */
+  .carpool-landing .carpool-wrap {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  /* Ensure CTA section doesn't add extra margin */
+  .carpool-landing .cta-section {
+    margin-bottom: 0 !important;
+    padding-bottom: 24px !important;
+  }
+}
+
+/* ========================================
+   FIX: How It Works Title Alignment on Mobile
+   ======================================== */
+
+/* Force consistent alignment for all cards */
+.how-it-works .hiw-step {
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+
+/* Ensure icon has consistent fixed height on all cards */
+.how-it-works .hiw-icon {
+  margin: 24px auto 16px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Title should start at same position */
+.how-it-works .hiw-title {
+  margin: 12px 0 8px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Text can grow to fill remaining space */
+.how-it-works .hiw-text {
+  flex-grow: 1 !important;
+}
+
+/* Mobile-specific alignment fixes */
+@media (max-width: 700px) {
+  .how-it-works .hiw-step {
+    padding: 20px 7px 10px !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Fixed spacing for icon on mobile */
+  .how-it-works .hiw-icon {
+    margin: 12px auto 4px !important;
+    height: 28px !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* Consistent title positioning */
+  .how-it-works .hiw-title {
+    margin: 4px 0 2px !important;
+    min-height: 2.4em !important; /* Reserve space for 2 lines */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  /* Text fills remaining space */
+  .how-it-works .hiw-text {
+    margin: 0 !important;
+    flex-grow: 1 !important;
+  }
+}
+
+/* Ultra-narrow screens */
+@media (max-width: 360px) {
+  .how-it-works .hiw-title {
+    min-height: 2.6em !important; /* Slightly more space for wrapped text */
+  }
+}
