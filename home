@@ -1,3 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Essential Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>CARPOOL - Free, Safe Rides in Bryan/College Station | Texas A&M Student Service</title>
+  <meta name="title" content="CARPOOL - Free, Safe Rides in Bryan/College Station | Texas A&M Student Service">
+  <meta name="description" content="CARPOOL is a Texas A&M student-run 501(c)(3) non-profit providing free, safe, and nonjudgmental rides home every Friday and Saturday night (10pm-3am) in Bryan/College Station. Over 297,000 rides given since 1999.">
+  <meta name="keywords" content="CARPOOL, Texas A&M, TAMU, free rides, safe rides, Bryan College Station, student service, designated driver, safe ride home, Aggieland, non-profit, 501c3, Friday Saturday nights, party rides, free transportation">
+  <meta name="author" content="CARPOOL">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://carpool.tamu.edu/">
+  
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://carpool.tamu.edu/">
+  <meta property="og:title" content="CARPOOL - Free, Safe Rides in Bryan/College Station">
+  <meta property="og:description" content="Student-run non-profit providing free, safe, and nonjudgmental rides home every Friday and Saturday night (10pm-3am) in Bryan/College Station. Call (979) 693-9905.">
+  <meta property="og:image" content="https://carpool.tamu.edu/wp-content/uploads/2023/01/CarpoolCookies2016.jpg">
+  <meta property="og:site_name" content="CARPOOL">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://carpool.tamu.edu/">
+  <meta name="twitter:title" content="CARPOOL - Free, Safe Rides in Bryan/College Station">
+  <meta name="twitter:description" content="Student-run non-profit providing free, safe, and nonjudgmental rides home every Friday and Saturday night. Call (979) 693-9905 for a free ride.">
+  <meta name="twitter:image" content="https://carpool.tamu.edu/wp-content/uploads/2023/01/CarpoolCookies2016.jpg">
+  <meta name="twitter:site" content="@tamucarpool">
+  <meta name="twitter:creator" content="@tamucarpool">
+  
+  <!-- Additional Meta Tags -->
+  <meta name="theme-color" content="#500000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=yes">
+  
+  <!-- Geographic Meta Tags -->
+  <meta name="geo.region" content="US-TX">
+  <meta name="geo.placename" content="College Station">
+  <meta name="geo.position" content="30.627977;-96.334407">
+  <meta name="ICBM" content="30.627977, -96.334407">
+  
+  <!-- Schema.org Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "CARPOOL",
+    "alternateName": "Texas A&M CARPOOL",
+    "url": "https://carpool.tamu.edu",
+    "logo": "https://carpool.tamu.edu/wp-content/uploads/2016/11/Logo_SGA.png",
+    "description": "Student-run 501(c)(3) non-profit providing free, safe, and nonjudgmental rides home in Bryan/College Station since 1999",
+    "foundingDate": "1999",
+    "nonprofitStatus": "501(c)(3)",
+    "telephone": "+1-979-693-9905",
+    "email": "publicrelations.carpool@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "College Station",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bryan/College Station"
+    },
+    "sameAs": [
+      "https://www.facebook.com/tamucarpool/",
+      "https://www.instagram.com/tamucarpool/",
+      "https://sga.tamu.edu"
+    ],
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Texas A&M Student Government Association"
+    }
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "CARPOOL Free Ride Service",
+    "serviceType": "Free Transportation Service",
+    "provider": {
+      "@type": "Organization",
+      "name": "CARPOOL"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bryan/College Station, Texas"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Students and Community Members"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "servicePhone": {
+        "@type": "ContactPoint",
+        "telephone": "+1-979-693-9905",
+        "contactType": "Customer Service"
+      }
+    },
+    "hoursAvailable": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Friday", "Saturday"],
+      "opens": "22:00",
+      "closes": "03:00"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
 <style>
 /* ===== CARPOOL HOME PAGE — Base Styles ===== */
 
@@ -1602,6 +1730,8 @@ body:has(.ride-modal-root #ride-modal-toggle:checked):has(#ride-card-open:not([h
 }
 
 </style>
+</head>
+<body>
 
 <!-- ======================= CARPOOL: Scheduled popup ======================= -->
 <div class="ride-modal-root" data-nosnippet="">
@@ -1836,8 +1966,6 @@ Changes posted on Facebook & Instagram.</p>
 </footer>
 </div>
 </section>
-
-
 <script>
 /* ============================================================
    CARPOOL — Homepage + Rewards (Inline/Avada-safe)
@@ -2289,3 +2417,5 @@ if (el.closest('.info-grid')) {
   })();
 })();
 </script>
+</body>
+</html>
